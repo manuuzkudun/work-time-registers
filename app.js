@@ -4,7 +4,8 @@ const express = require('express'),
 			app = express(),
 			csv = require('csv-parser'),
 			fs = require('fs'),
-			dateFormat = require('dateformat');
+			dateFormat = require('dateformat'),
+			_ = require('underscore');
 
 
 
@@ -33,21 +34,10 @@ fs.createReadStream('horarios.csv')
 
 
 
-app.get('/',(req,res) => {
-	//res.json(workTimeArray);
-	var info = '<ul>';
-	workTimeArray.forEach((record) => {
-		info += `
-		<li>
-			<h2>${record.Name}</h2>
-			<p>${record.Date}</p>
-			<p>${record.Time}</p>
-		</li>
-	`
-	});
-	info += '</ul>'
-	res.send(info);
-});
+
+app.use( require('./routes/index') );
+app.use(require('./routes/employees'));
+
 
 app.listen(app.get('port'),() => {
 	console.log(`Example app listening on port ${app.get('port')}!`);
