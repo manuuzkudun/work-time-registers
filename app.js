@@ -9,6 +9,7 @@ const express = require('express'),
 
 
 app.set('port',process.env.PORT || 3000);
+app.set('json spaces', 2);
 
 var workTimeArray = [];
 
