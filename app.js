@@ -27,14 +27,25 @@ fs.createReadStream('horarios.csv')
   		Date: dateFormat(date,"dd/mm/yyyy"),
   		Time: dateFormat(date,"hh:MM:ss"),
   	};
-    console.log(dataFiltered);
     workTimeArray.push(dataFiltered);
   });
 
 
 
 app.get('/',(req,res) => {
-	res.json(workTimeArray);
+	//res.json(workTimeArray);
+	var info = '<ul>';
+	workTimeArray.forEach((record) => {
+		info += `
+		<li>
+			<h2>${record.Name}</h2>
+			<p>${record.Date}</p>
+			<p>${record.Time}</p>
+		</li>
+	`
+	});
+	info += '</ul>'
+	res.send(info);
 });
 
 app.listen(app.get('port'),() => {
