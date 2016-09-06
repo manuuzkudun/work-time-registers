@@ -27,6 +27,7 @@ fs.createReadStream('horarios.csv')
   		Date: dateFormat(date,"dd/mm/yyyy"),
   		Time: dateFormat(date,"hh:MM:ss"),
   	};
+
     workTimeArray.push(dataFiltered);
   });
 
