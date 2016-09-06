@@ -19,10 +19,12 @@ router.get('/employees',(req,res) => {
 			<h2>${record.Name}</h2>
 			<p>${record.Date}</p>
 			<p>${record.Time}</p>
+			<p>${record.Action}</p>
 		</li>
 	`
 	});
 	info += '</ul>'
+	info += '<script src="/reload/reload.js"></script>'
 	res.send(info);
 });
 
@@ -38,10 +40,12 @@ router.get('/employee/:id',(req,res) => {
 			<h2>${record.Name}</h2>
 			<p>${record.Date}</p>
 			<p>${record.Time}</p>
+			<p>${record.Action}</p>
 		</li>
 	`
 	});
 	info += '</ul>'
+	info += '<script src="/reload/reload.js"></script>'
 	res.send(info);
 	}
 });
