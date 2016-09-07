@@ -1,0 +1,26 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="record in data">
+      <td>
+        {{record.Name}}
+      </td>
+      <td>
+        {{record.Date}}
+      </td>
+      <td>
+       {{record.Time}}
+      </td>
+      <td>
+        {{record.Action}}
+      </td>
+    </tr>
+  </tbody>
+</table>
