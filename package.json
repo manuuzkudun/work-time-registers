@@ -4,6 +4,7 @@
   "description": "wep-app to check your work time",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon -e css,ejs,js,json --harmony app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,7 +12,10 @@
   "dependencies": {
     "csv-parser": "^1.11.0",
     "dateformat": "^1.0.12",
+    "ejs": "^2.5.1",
     "express": "^4.14.0",
+    "nodemon": "^1.10.2",
+    "reload": "^1.0.1",
     "underscore": "^1.8.3"
   }
 }

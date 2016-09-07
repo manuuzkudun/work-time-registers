@@ -8,6 +8,8 @@ const express = require('express'),
 // Configure express app
 app.set('port',process.env.PORT || 3000);
 app.set('json spaces', 2);
+app.set('view engine', 'ejs');
+app.set('views','views');
 
 app.use(express.static('./public'));
 
