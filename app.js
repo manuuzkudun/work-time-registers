@@ -16,6 +16,7 @@ app.use(express.static('./public'));
 // Load routes
 app.use( require('./routes/index') );
 app.use(require('./routes/employees'));
+app.use(require('./routes/api'));
 
 
 var server = app.listen(app.get('port'),() => {
