@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "csv-parser": "^1.11.0",
     "dateformat": "^1.0.12",
     "ejs": "^2.5.1",

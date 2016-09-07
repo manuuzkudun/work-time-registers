@@ -3,6 +3,7 @@
 const express = require('express')
   , reload = require('reload')
   , mysql = require('mysql')
+  , bodyParser = require('body-parser')
   , app = express();
 
 
@@ -27,8 +28,11 @@ app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-app.use(express.static('./public'));
 
+// Add middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('./public'));
 
 // Load routes
 app.use(require('./routes/index'));
