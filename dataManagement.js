@@ -38,7 +38,8 @@ fs.createReadStream('records.csv').pipe(csv({
     Id: data.Id
     , Name: data.Name
     , Date: dateFormat(date, "dd/mm/yyyy")
-    , Time: dateFormat(date, "hh:MM:ss")
+    , DateTime: data.DateTime
+    , Time: dateFormat(date, "HH:MM:ss")
     , Action: actions[data.Action]
   };
   workTimeArray.push(dataFiltered);

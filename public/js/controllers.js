@@ -21,6 +21,24 @@ myApp.controller('myController', function ($scope, $http) {
     });
     return props;
   }
+  
+  
+  function timeDifference(dateTime1,dateTime2){
+    var diff = new Date(dateTime2) - new Date(dateTime1);
+    var seconds = diff/1000;
+    var minutes = Math.floor(seconds/60);
+    var hours = Math.floor(minutes/60);
+    var days = Math.floor(hours/24);
+    
+    hours = hours-(days*24);
+    minutes = minutes-(days*24*60)-(hours*60);
+    seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
+    
+    return hours + ":" + minutes + ":" + seconds;
+  }
+  
+  
+
 
   $scope.getEmployeeData = function (){
     
@@ -43,15 +61,19 @@ myApp.controller('myController', function ($scope, $http) {
           
           var startWork = data.filter(function(record){
             return (record.Date == date && record.Action == 'start' );
-          })[0].Time;
+          })[0];
           
           var leaveWork = data.filter(function(record){
             return (record.Date == date && record.Action == 'leave' );
-          })[0].Time;
+          })[0];
           
-          var totalWork = new Date(startWork) - new Date(leaveWork) ;
           
-          return ({Date: date, startWork: startWork, endWork: leaveWork, totalWork: totalWork});
+          
+       var totalWork= timeDifference(startWork.DateTime,leaveWork.DateTime);
+          
+
+                  
+          return ({Date: date, startWork:startWork.Time, endWork:  leaveWork.Time, totalWork: totalWork});
         });
         
       }, function(resonse){

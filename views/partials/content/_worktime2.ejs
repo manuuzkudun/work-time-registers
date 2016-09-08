@@ -1,8 +1,18 @@
-<div class="form-group">
-  <label for="sel1">Get employee time registrations </label>
-  <select class="form-control" id="sel1" ng-model="reqEmployee" ng-options="name for name in names">{{name}}</select>
-  <button type="button" class="btn btn-primary" ng-click="getEmployeeData()">Go</button>
-</div>
+<form>
+  <div class="form-group">
+    <!-- State Button -->
+    <label for="sel1" class="control-label">State</label>
+    <select class="selectpicker form-control" data-style="btn-primary" id="sel1" ng-model="reqEmployee" ng-options="name for name in names" title="Choose employee...">{{name}}</select>
+  </div>
+  <div class="form-group">
+
+    <!-- Submit Button -->
+    <div class="col-xs-3">
+      <button type="button" class="btn btn-primary" ng-click="getEmployeeData()">Go!</button>
+    </div>
+  </div>
+</form>
+
 
 <!--<input class="form-control" ng-model="query" placeholder="Search for employees" autofucus> -->
 <table class="table table-hover" ng-show="data">
@@ -23,9 +33,6 @@
     </tr>
   </tbody>
 </table>
-
-
-
 <table class="table table-hover" ng-show="data">
   <thead>
     <tr>
@@ -37,7 +44,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="record in dataProcessed">
-      <td> {{record.Dpoate}} </td>
+      <td> {{record.Date}} </td>
       <td> {{record.startWork}} </td>
       <td> {{record.endWork}} </td>
       <td> {{record.totalWork}} </td>
