@@ -1,53 +1,64 @@
-<form>
+<form style "margin:60px 0;">
   <div class="form-group">
     <!-- State Button -->
     <label for="sel1" class="control-label">State</label>
     <select class="selectpicker form-control" data-style="btn-primary" id="sel1" ng-model="reqEmployee" ng-options="name for name in names" title="Choose employee...">{{name}}</select>
   </div>
   <div class="form-group">
-
     <!-- Submit Button -->
     <div class="col-xs-3">
       <button type="button" class="btn btn-primary" ng-click="getEmployeeData()">Go!</button>
     </div>
   </div>
 </form>
-
-
+<div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#sectionA">Section A</a></li>
+    <li><a data-toggle="tab" href="#sectionB">Section B</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="sectionA" class="tab-pane fade in active">
+      <h3>All Data</h3>
+      <table class="table table-hover" ng-show="data">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="record in data">
+            <td> {{record.Name | uppercase}} </td>
+            <td> {{record.Date}} </td>
+            <td> {{record.Time}} </td>
+            <td> {{record.Action | uppercase}} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="sectionB" class="tab-pane fade">
+      <h3>Processed Data</h3>
+      <table class="table table-hover" ng-show="data">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Start Work</th>
+            <th>Leave Work</th>
+            <th>Total Work</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="record in dataProcessed">
+            <td> {{record.Date}} </td>
+            <td> {{record.startWork}} </td>
+            <td> {{record.endWork}} </td>
+            <td> {{record.totalWork}} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 <!--<input class="form-control" ng-model="query" placeholder="Search for employees" autofucus> -->
-<table class="table table-hover" ng-show="data">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="record in data">
-      <td> {{record.Name | uppercase}} </td>
-      <td> {{record.Date}} </td>
-      <td> {{record.Time}} </td>
-      <td> {{record.Action | uppercase}} </td>
-    </tr>
-  </tbody>
-</table>
-<table class="table table-hover" ng-show="data">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Start Work</th>
-      <th>Leave Work</th>
-      <th>Total Work</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="record in dataProcessed">
-      <td> {{record.Date}} </td>
-      <td> {{record.startWork}} </td>
-      <td> {{record.endWork}} </td>
-      <td> {{record.totalWork}} </td>
-    </tr>
-  </tbody>
-</table>
