@@ -35,7 +35,22 @@ myApp.controller('myController', function ($scope, $http) {
     });
   }
   
-
+  function getSpecificRecord(records,reqDate, reqAction) {
+    var candidates = records.filter(function (record) {
+      return (record.Date == reqDate && record.Action == reqAction);
+        });
+    var out =  (candidates.length > 0) ? candidates[0] : {'Time': 'NO-DATA'};
+    return out;
+  }
+  
+  function computeTotalWork(startWork,leaveWork){
+    if (startWork.DateTime && leaveWork.DateTime){
+      return timeDifference(startWork.DateTime, leaveWork.DateTime);
+    } else {
+      return 'NO-DATA';
+    }
+  }
+  
 
   
   $scope.getEmployeeData = function () {
@@ -54,21 +69,15 @@ myApp.controller('myController', function ($scope, $http) {
       var data = response.data;
       $scope.data = data;
       
+      
       var dates = getProps(response.data, 'Date');
       
       $scope.dataProcessed = dates.map(function (date) {
-        
-        var startWork = data.filter(function (record) {
-          return (record.Date == date && record.Action == 'start');
-        })[0];
-        
-        
-        var leaveWork = data.filter(function (record) {
-          return (record.Date == date && record.Action == 'leave');
-        })[0];
-        
-        var totalWork = timeDifference(startWork.DateTime, leaveWork.DateTime);
-        
+                      
+      var startWork = getSpecificRecord(data,date,'start');
+      var leaveWork = getSpecificRecord(data,date,'leave');        
+      var totalWork = computeTotalWork(startWork,leaveWork);
+
         return ({
           Date: date
           , startWork: startWork.Time
