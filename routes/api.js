@@ -2,27 +2,7 @@
 
 const express = require('express')
   , router = express.Router()
-  , mongoose = require('mongoose')
   , _ = require('underscore');
-
-var Message = mongoose.model('Message', { 
-  msg: String
-});
-
-
-//var msg = new Message({msg: 'Kaixo Manu'});
-Message.find({}).exec((err,results) =>{
-  console.log(results);
-  
-});
-
-//msg.save();
-// Connect to mongodb (using mongoose) and set the database connection
-mongoose.connect("mongodb://localhost:27017/test", (err,db) =>{
-  if(!err){
-    console.log("We are connected to mongoDb");
-  }
-});
 
 var workTimeArray = require('../dataManagement');
 
