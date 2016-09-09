@@ -3,10 +3,7 @@
 const express = require('express')
   , reload = require('reload')
   , bodyParser = require('body-parser')
-  , mongo = require('mongodb').MongoClient
   , app = express();
-
-var database;
 
 // Configure express app
 app.set('port', process.env.PORT || 3000);
@@ -28,14 +25,6 @@ app.use((req,res,next) => {
 app.use(require('./routes/index'));
 app.use(require('./routes/employees'));
 app.use(require('./routes/api'));
-
-// Connect to mongodb and set the database connection
-mongo.connect("mongodb://localhost:27017/test", (err,db) =>{
-  if(!err){
-    console.log("We are connected to mongoDb");
-    database = db;
-  }
-});
 
 var server = app.listen(app.get('port'), () => {
   console.log(`Example app listening on port ${app.get('port')}!`);
