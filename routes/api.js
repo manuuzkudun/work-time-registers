@@ -2,23 +2,27 @@
 
 const express = require('express')
   , router = express.Router()
-  , _ = require('underscore');
+  , _ = require('underscore')
+  , mongoose = require('mongoose')
+  , Register = require("../dataManagement");
 
-var workTimeArray = require('../dataManagement');
 
 router.get('/api/time-reg/list', (req, res) => {
-  res.json(workTimeArray);
+  Register.find({}).exec((err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
 });
 
 router.post('/api/time-reg', (req, res) => {
-  var filtered = _.where(workTimeArray, {
-    Name: req.body.name
+  Register.find({employeeName: req.body.name}).exec((err, results) => {
+    if (err) throw err;
+    res.json(results);
   });
-  res.json(filtered);
 });
 
 router.get('/api/time-reg/:id', (req, res) => {
-  var filtered = _.where(workTimeArray, {
+  var filtered = _.where(registerData, {
     Id: req.params.id
   });
   res.json(filtered);

@@ -6,6 +6,11 @@ myApp.controller('myController', function ($scope, $http) {
   $scope.dataProcessed = null;
   getEmployeeNames();
 
+  
+  $scope.sortComment = function(comment) {
+    var date = new Date(comment.dateTime);
+    return date;
+};
     
   function getProps(data, prop) {
     var props = data.map(function (obj) {
@@ -31,7 +36,7 @@ myApp.controller('myController', function ($scope, $http) {
   
   function getEmployeeNames() {
     $http.get('http://localhost:3000/api/time-reg/list').success(function (data) {
-      $scope.names = getProps(data, 'Name');  
+      $scope.names = getProps(data, 'employeeName');  
     });
   }
   
@@ -66,6 +71,12 @@ myApp.controller('myController', function ($scope, $http) {
     };
     
     $http(req).then(function (response) {
+      var vm = {
+        Name: response.data.employeeName,
+        Date: '0/0/0',
+        Time: '0:0:0',
+        Action: response.data.action
+      }; 
       var data = response.data;
       $scope.data = data;
       

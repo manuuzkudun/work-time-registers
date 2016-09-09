@@ -29,11 +29,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="record in data">
-            <td> {{record.Name | uppercase}} </td>
-            <td> {{record.Date}} </td>
-            <td> {{record.Time}} </td>
-            <td> {{record.Action | uppercase}} </td>
+          <tr ng-repeat="record in data | orderBy : sortComment : true">
+            <td> {{record.employeeName}} </td>
+            <td> {{record.dateTime | date: "dd/M/yyyy"}} </td>
+            <td> {{record.dateTime | date: "HH:mm:ss" }} </td>
+            <td> {{record.action | uppercase}} </td>
           </tr>
         </tbody>
       </table>

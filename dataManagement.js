@@ -12,48 +12,19 @@ const csv = require('csv-parser')
     , '1': 'end-rest'
   };
 
+var csvOptions = {
+  separator: '\t'
+  , headers: ['Id', 'DateTime', 'ni1', 'ni2', 'Name', 'Action', 'nil3', 'nil4']
+};
 
 // Connect to mongodb (using mongoose) and set the database connection
-mongoose.connect("mongodb://localhost:27017/test", (err,db) =>{
-  if(!err){
+mongoose.connect("mongodb://localhost:27017/test", (err, db) => {
+  if (!err) {
     console.log("We are connected to mongoDb");
   }
 });
 
-
-
-
-
-/*var connection = mysql.createConnection({
-  host: 'localhost'
-  , user: 'root'
-  , password: 'alpha1'
-  , database: 'gestion_horas'
-});
-
-connection.connect();
-
-connection.query('SELECT * FROM users', function (err, rows, fields) {
-  if (err) throw err;
-  console.log('The solution is: ', rows[0].email);
-});
-
-connection.end();*/
-
-
-
-
-
-var workTimeArray = [];
-
-fs.createReadStream('records.csv').pipe(csv({
-  separator: '\t'
-  , headers: ['Id', 'DateTime', 'ni1', 'ni2', 'Name', 'Action', 'nil3', 'nil4']
-})).on('data', (data) => {
-  
-  
-  
-  let date = new Date(data.DateTime);
+/*  let date = new Date(data.DateTime);
   let dataFiltered = {
     Id: data.Id
     , Name: data.Name
@@ -62,41 +33,61 @@ fs.createReadStream('records.csv').pipe(csv({
     , Time: dateFormat(date, "HH:MM:ss")
     , Action: actions[data.Action]
   };
-  workTimeArray.push(dataFiltered);
+  workTimeArray.push(dataFiltered); */
+
+
+// Mongoose time registration model
+var Register = mongoose.model('Register', {
+  employeeId: String
+  , employeeName: String
+  , dateTime: Date
+  , action: String
 });
 
+function saveRegToDb(reg) {
+  reg.save(function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
+
+function parseAndSaveAllRegs(path, csvOptions) {
+  var count = 0;
+  fs.createReadStream('records.csv').pipe(csv(csvOptions)).on('data', (data) => {
+    let reg = new Register({
+      employeeId: data.Id
+      , employeeName: data.Name
+      , dateTime: data.DateTime
+      , action: actions[data.Action]
+    });
+    saveRegToDb(reg);
+    count += 1;
+  }).on('end', () => {
+    console.log(`Inserted ${count} time registrations`)
+  });
+}
+
+/*
+  Register.find({}).exec((err, results) => {
+    if (err) throw err;
+    console.log(results);  
+  });*/
 
 
 
-
-var Register = mongoose.model('Register', { 
-  employeeId: String,
-  employeeName: String,
-  dateTime: Date,
-  action: String
+/*
+Register.remove({}, (err) => {
+  if (err) throw err;
+  console.log('Removed all time registrations from the database');
 });
-
-var reg = new Register({
-  employeeId: '1',
-  employeeName: 'Manu uzkudun',
-  dateTime: Date.Now,
-  action: 'start'
-});
+*/
 
 
 
-
-reg.save(function (err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('meow');
-  }
-});
-
-Register.find({}).exec((err,results) =>{
-  console.log(results);
-});
+//removeAllRegisters();
+//parseAndSaveAllRegs('/records.csv',csvOptions);
 
 
-module.exports = workTimeArray;
+// Export the Mongoose model
+module.exports = Register;
