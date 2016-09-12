@@ -34,6 +34,15 @@ myApp.controller('myController', function ($scope, $http) {
     return hours + ":" + minutes + ":" + seconds;
   }
   
+  function getDate(dateTimeString){
+    var dateTime = new Date(dateTimeString);
+    var day = dateTime.getDate(); 
+    var month = date.getMonth(); 
+    var year = date.getFullYear();
+    var date = `${day}/${month}/${year}`
+    return date;
+  }
+  
   function getEmployeeNames() {
     $http.get('http://localhost:3000/api/time-reg/list').success(function (data) {
       $scope.names = getProps(data, 'employeeName');  
@@ -49,7 +58,7 @@ myApp.controller('myController', function ($scope, $http) {
   }
   
   function computeTotalWork(startWork,leaveWork){
-    if (startWork.DateTime && leaveWork.DateTime){
+    if (startWork.dateTime && leaveWork.dateTime){
       return timeDifference(startWork.DateTime, leaveWork.DateTime);
     } else {
       return 'NO-DATA';

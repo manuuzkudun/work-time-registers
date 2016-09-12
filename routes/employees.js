@@ -4,7 +4,7 @@ const express = require('express')
     , router = express.Router()
     , _ = require('underscore');
 
-var workTimeArray = require('../dataManagement');
+var workTimeArray = require('../Register');
 
 router.get('/employees', (req, res) => {
     res.render('worktime', {

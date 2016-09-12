@@ -2,9 +2,8 @@
 
 const express = require('express')
   , router = express.Router()
-  , _ = require('underscore')
   , mongoose = require('mongoose')
-  , Register = require("../dataManagement");
+  , Register = require("../Register");
 
 
 router.get('/api/time-reg/list', (req, res) => {
@@ -22,10 +21,10 @@ router.post('/api/time-reg', (req, res) => {
 });
 
 router.get('/api/time-reg/:id', (req, res) => {
-  var filtered = _.where(registerData, {
-    Id: req.params.id
+Register.find({employeeId: req.params.id}).exec((err, results) => {
+    if (err) throw err;
+    res.json(results);
   });
-  res.json(filtered);
 });
 
 module.exports = router;
