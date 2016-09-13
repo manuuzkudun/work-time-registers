@@ -82,7 +82,6 @@ myApp.controller('myController', function ($scope, $http) {
   
   
   $scope.getEmployeeData = function () {
-    console.log($scope.reqEmployee);
     var req = {
       method: 'POST'
       , url: 'http://localhost:3000/api/time-reg'
@@ -98,10 +97,13 @@ myApp.controller('myController', function ($scope, $http) {
       var data = response.data;
       $scope.data = data;
       
-      var dates = getProps(response.data, 'Date');
-      
+      var dates = _.unique(data,function(record){
+        return moment(record.dateTime).format("DD/MM/YYYY");
+      }).map(function(record){
+        return moment(record.dateTime).format("DD/MM/YYYY");
+      });
       $scope.dataProcessed = dates.map(function (date) {
-                      
+
       var startWork = getSpecificRecord(data,date,'start');
       var leaveWork = getSpecificRecord(data,date,'leave');        
       var totalWork = computeTotalWork(startWork,leaveWork);
