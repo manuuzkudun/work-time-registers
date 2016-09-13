@@ -104,15 +104,19 @@ myApp.controller('myController', function ($scope, $http) {
       });
       $scope.dataProcessed = dates.map(function (date) {
 
-      var startWork = getSpecificRecord(data,date,'start');
-      var leaveWork = getSpecificRecord(data,date,'leave');        
-      var totalWork = computeTotalWork(startWork,leaveWork);
+        var dayRecords = data.filter(function(record){
+          return(moment(record.dateTime).format("DD/MM/YYYY") == date);
+        });
+
+      var startWork = _.where(dayRecords,{action: 'start'})[0] || {dateTime: 'NO-DATA'};
+      var leaveWork = _.where(dayRecords,{action: 'leave'})[0] || {dateTime: 'NO-DATA'};  
+      //var totalWork = computeTotalWork(startWork,leaveWork);
 
         return ({
           Date: date
-          , startWork: startWork.Time
-          , endWork: leaveWork.Time
-          , totalWork: totalWork
+          , startWork: startWork.dateTime
+          , endWork: leaveWork.dateTime
+          , totalWork: 0
         });
       });
     }, function (resonse) {
