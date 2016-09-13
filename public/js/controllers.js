@@ -1,5 +1,19 @@
-var myApp = angular.module('myApp', []);
 
+
+var myApp = angular.module("myApp", ["ngRoute"]);
+
+myApp.config(function($routeProvider) {
+    $routeProvider
+    .when("/home", {
+        templateUrl : "./partials/content/_home.html"
+    })
+    .when("/data", {
+        templateUrl : "./partials/content/_data.html"
+    })
+    .otherwise({
+      redirectTo: '/home'
+    });
+});
 myApp.controller('myController', function ($scope, $http) {
   
   $scope.data = null;
@@ -65,9 +79,10 @@ myApp.controller('myController', function ($scope, $http) {
     }
   }
   
-
+  
   
   $scope.getEmployeeData = function () {
+    console.log($scope.reqEmployee);
     var req = {
       method: 'POST'
       , url: 'http://localhost:3000/api/time-reg'
@@ -80,15 +95,8 @@ myApp.controller('myController', function ($scope, $http) {
     };
     
     $http(req).then(function (response) {
-      var vm = {
-        Name: response.data.employeeName,
-        Date: '0/0/0',
-        Time: '0:0:0',
-        Action: response.data.action
-      }; 
       var data = response.data;
       $scope.data = data;
-      
       
       var dates = getProps(response.data, 'Date');
       

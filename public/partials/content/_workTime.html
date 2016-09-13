@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="record in data | orderBy : sortComment : true">
+          <tr ng-repeat="record in data | orderBy : sortByDate : true">
             <td> {{record.employeeName}} </td>
             <td> {{record.dateTime | date: "dd/M/yyyy"}} </td>
             <td> {{record.dateTime | date: "HH:mm:ss" }} </td>
@@ -37,6 +37,31 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div>
+          <h3>Processed Data</h3>
+      <table class="table table-hover" ng-show="data">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Start Work</th>
+            <th>Leave Work</th>
+            <th>Total Rest</th>
+            <th>Total Work</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="record in dataProcessed  | orderBy : sortByDate : true">
+            <td> {{record.Date | date: "dd/M/yyyy"}} </td>
+            <td> {{record.startWork | date: "HH:mm:ss"}} </td>
+            <td> {{record.endWork | date: "HH:mm:ss"}} </td>
+            <td> {{record.totalRest}} </td>
+            <td> {{record.totalWork}} </td>
+          </tr>
+        </tbody>
+      </table>
+    
+    
     </div>
     <div id="sectionB" class="tab-pane fade">
       <h3>Processed Data</h3>
@@ -46,14 +71,16 @@
             <th>Date</th>
             <th>Start Work</th>
             <th>Leave Work</th>
+            <th>Total Rest</th>
             <th>Total Work</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="record in dataProcessed">
-            <td> {{record.Date}} </td>
-            <td> {{record.startWork}} </td>
-            <td> {{record.endWork}} </td>
+          <tr ng-repeat="record in dataProcessed  | orderBy : sortByDate : true">
+            <td> {{record.Date | date: "dd/M/yyyy"}} </td>
+            <td> {{record.startWork | date: "HH:mm:ss"}} </td>
+            <td> {{record.endWork | date: "HH:mm:ss"}} </td>
+            <td> {{record.totalRest}} </td>
             <td> {{record.totalWork}} </td>
           </tr>
         </tbody>
