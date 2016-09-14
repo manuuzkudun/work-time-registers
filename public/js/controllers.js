@@ -73,7 +73,7 @@ myApp.controller('myController', function ($scope, $http) {
   
   function computeTotalWork(startWork,leaveWork){
     if (startWork.dateTime && leaveWork.dateTime){
-      return timeDifference(startWork.DateTime, leaveWork.DateTime);
+      return timeDifference(startWork.dateTime, leaveWork.dateTime);
     } else {
       return 'NO-DATA';
     }
@@ -110,13 +110,13 @@ myApp.controller('myController', function ($scope, $http) {
 
       var startWork = _.where(dayRecords,{action: 'start'})[0] || {dateTime: 'NO-DATA'};
       var leaveWork = _.where(dayRecords,{action: 'leave'})[0] || {dateTime: 'NO-DATA'};  
-      //var totalWork = computeTotalWork(startWork,leaveWork);
+      var totalWork = computeTotalWork(startWork,leaveWork);
 
         return ({
           Date: date
           , startWork: startWork.dateTime
           , endWork: leaveWork.dateTime
-          , totalWork: 0
+          , totalWork: totalWork
         });
       });
     }, function (resonse) {
