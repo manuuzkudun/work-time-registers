@@ -63,7 +63,14 @@ timeData.controller('myController', function ($scope, $http) {
     }
   }
   
-  
+  function computeTotalRest(startRest,endRest){
+    if ((startRest.length >0)  && (endRest.length > 0) && (startRest.length == endRest.length)) {
+         return timeDifference(startRest[0].dateTime,endRest[0].dateTime);
+    } else {
+      return 'NO_DATA';
+    }
+    
+  }
   
   $scope.getEmployeeData = function () {
     var req = {
@@ -94,14 +101,17 @@ timeData.controller('myController', function ($scope, $http) {
 
       var startWork = _.where(dayRecords,{action: 'start'})[0] || {dateTime: 'NO-DATA'};
       var leaveWork = _.where(dayRecords,{action: 'leave'})[0] || {dateTime: 'NO-DATA'};
-      var restStart = _.where(dayRecords,{action: 'rest-start'});
-      var restEnd = _.where(dayRecords,{action: 'rest-end'});
+      var restStart = _.where(dayRecords,{action: 'start-rest'});
+      var restStart = _.where(dayRecords,{action: 'start-rest'});
+      var restEnd = _.where(dayRecords,{action: 'end-rest'});
+      var totalRest = computeTotalRest(restStart,restEnd);
       var totalWork = computeTotalWork(startWork,leaveWork);
 
         return ({
           Date: date
           , startWork: startWork.dateTime
           , endWork: leaveWork.dateTime
+          , totalRest: totalRest.toString()
           , totalWork: totalWork
         });
       });
