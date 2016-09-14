@@ -1,20 +1,9 @@
 
 
-var myApp = angular.module("myApp", ["ngRoute"]);
+var timeData = angular.module("timeData",[]);
 
-myApp.config(function($routeProvider) {
-    $routeProvider
-    .when("/home", {
-        templateUrl : "./partials/content/_home.html"
-    })
-    .when("/data", {
-        templateUrl : "./partials/content/_data.html"
-    })
-    .otherwise({
-      redirectTo: '/home'
-    });
-});
-myApp.controller('myController', function ($scope, $http) {
+
+timeData.controller('myController', function ($scope, $http) {
   
   $scope.data = null;
   $scope.dataProcessed = null;

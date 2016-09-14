@@ -1,17 +1,14 @@
-angular.module('ui.bootstrap.demo', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
-angular.module('ui.bootstrap.demo').controller('TabsDemoCtrl', function ($scope, $window) {
-  $scope.tabs = [
-    { title:'Dynamic Title 1', content:'Dynamic content 1' },
-    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-  ];
+var myApp = angular.module("myApp", ["ngRoute","timeData"]);
 
-  $scope.alertMe = function() {
-    setTimeout(function() {
-      $window.alert('You\'ve selected the alert tab!');
+myApp.config(function($routeProvider) {
+    $routeProvider
+    .when("/home", {
+        templateUrl : "./partials/content/_home.html"
+    })
+    .when("/data", {
+        templateUrl : "./partials/content/_data.html"
+    })
+    .otherwise({
+      redirectTo: '/home'
     });
-  };
-
-  $scope.model = {
-    name: 'Tabs'
-  };
 });
