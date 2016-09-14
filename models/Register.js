@@ -1,14 +1,8 @@
 'use strict';
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      db = require('../config/db');
 
-
-// Connect to mongodb (using mongoose) and set the database connection
-mongoose.connect("mongodb://localhost:27017/test", (err, db) => {
-  if (!err) {
-    console.log("We are connected to mongoDb");
-  }
-});
 
 
 // Mongoose time registration model

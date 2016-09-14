@@ -34,5 +34,13 @@ function parseAndSaveAllRegs(path, csvOptions) {
 }
 
 
+
+/*
+Register.remove({}, (err) => {
+  if (err) throw err;
+  console.log('Removed all time registrations from the database');
+});
+*/
+
 //parseAndSaveAllRegs('/records.csv',csvOptions);
 module.exports = parseAndSaveAllRegs;

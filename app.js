@@ -22,7 +22,7 @@ app.use((req,res,next) => {
 });
 
 // Load routes
-app.use(require('./routes/api'));
+app.use('/api', require('./routes/api'));
 var server = app.listen(app.get('port'), () => {
   console.log(`Example app listening on port ${app.get('port')}!`);
 });

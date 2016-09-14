@@ -42,7 +42,7 @@ timeData.controller('myController', function ($scope, $http) {
   }
   
   function getEmployeeNames() {
-    $http.get('http://localhost:3000/api/time-reg/list').success(function (data) {
+    $http.get('http://localhost:3000/api/registers').success(function (data) {
       $scope.names = getProps(data, 'employeeName');  
     });
   }
@@ -72,27 +72,22 @@ timeData.controller('myController', function ($scope, $http) {
     
   }
   
+  
   $scope.getEmployeeData = function () {
-    var req = {
-      method: 'POST'
-      , url: 'http://localhost:3000/api/time-reg'
-      , headers: {
-        'Content-Type': 'application/json'
-      }
-      , data: {
-        name: $scope.reqEmployee
-      }
-    };
-    
-    $http(req).then(function (response) {
-      var data = response.data;
-      $scope.data = data;
+
       
-      var dates = _.unique(data,function(record){
+    var url = 'http://localhost:3000/api/registers/1';
+    $http.get(url).then(function (response) {
+        var data = response.data;
+       $scope.data = data;
+      
+            var dates = _.unique(data,function(record){
         return moment(record.dateTime).format("DD/MM/YYYY");
       }).map(function(record){
         return moment(record.dateTime).format("DD/MM/YYYY");
       });
+      
+
       $scope.dataProcessed = dates.map(function (date) {
 
         var dayRecords = data.filter(function(record){
@@ -115,8 +110,7 @@ timeData.controller('myController', function ($scope, $http) {
           , totalWork: totalWork
         });
       });
-    }, function (resonse) {
-      console.log('Error');
-    });
+
+  });
   }
 });

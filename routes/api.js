@@ -6,25 +6,39 @@ const express = require('express')
   , Register = require("../Register");
 
 
-router.get('/api/time-reg/list', (req, res) => {
+
+
+
+
+router.get('/registers', (req, res) => {
   Register.find({}).exec((err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 
-router.post('/api/time-reg', (req, res) => {
-  Register.find({employeeName: req.body.name}).exec((err, results) => {
+
+router.get('/registers/:id', (req, res) => {
+  Register.find({employeeId: req.params.id}).exec((err, result) => {
     if (err) throw err;
-    res.json(results);
+    res.json(result);
   });
 });
 
-router.get('/api/time-reg/:id', (req, res) => {
-Register.find({employeeId: req.params.id}).exec((err, results) => {
-    if (err) throw err;
-    res.json(results);
+
+router.post('/registers',(req,res) => {
+  var reg = new Register({
+    employeeId: req.body.employeeId
+  , employeeName: req.body.name
+  , dateTime: req.body.dateTime
+  , action: req.body.action
+  });
+  reg.save( (err, data) => {
+    if (err) console.log(err);
+    else console.log('Saved ', data );
   });
 });
+
+
 
 module.exports = router;
