@@ -2,12 +2,7 @@
 
 const express = require('express')
   , router = express.Router()
-  , mongoose = require('mongoose')
-  , Register = require("../Register");
-
-
-
-
+  , Register = require("../models/Register");
 
 
 router.get('/registers', (req, res) => {
