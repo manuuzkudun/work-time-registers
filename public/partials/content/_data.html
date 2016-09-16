@@ -2,48 +2,50 @@
   <div class="row">
   <div class="col-md-4">
     <form class="form-group">
-      <label for="sel1" class="control-label">Select a employee</label>
+      <label for="sel1" class="control-label">Select a employee </label>
       <div class="row">
         <div class="col-xs-8">
-         <select class="form-control" data-style="btn-primary" id="sel1" ng-model="selEmployee" ng-options="employee.name for employee in employees" title="Choose employee...">
+         <select class="form-control" data-style="btn-primary" id="sel1" ng-model="selEmployee" ng-options="employee.name for employee in employees" title="Choose employee..."> </select>
         </div>
         <div class="col-xs-4">
-          <button type="button" class="btn btn-primary" ng-click="getEmployeeData()">Go!</button>
+         <button type="button" class="btn btn-primary" ng-click="getEmployeeData()">Go!</button>
         </div>
       </div>
-  </form>
+    </form>
+    <div ng-show="name">
+      <h3>{{name}}</h3>
+      <img class="img-responsive" src="http://placehold.it/150x200" alt ="{{name}}">
+    </div>
   </div>
-  
-  <div class = "col-md-8" ng-show="data">
+
+  <div class = "col-md-8" ng-show="registers">
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#sectionA">Raw Data</a></li>
       <li><a data-toggle="tab" data-target="#sectionB">Processed Data</a></li>
     </ul>
     <div class="tab-content">
       <div id="sectionA" class="tab-pane fade in active">
-        <h3>Raw Data</h3>
+        <h3 class="text-primary">Raw Data</h3>
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Name</th>
               <th>Date</th>
               <th>Time</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr ng-repeat="record in data | orderBy : sortByDate : true">
-              <td> {{record.employeeName}} </td>
-              <td> {{record.dateTime | date: "dd/M/yyyy"}} </td>
-              <td> {{record.dateTime | date: "HH:mm:ss" }} </td>
-              <td> {{record.action | uppercase}} </td>
+          <tbody> <!--| orderBy : sortByDate : true-->
+            <tr ng-repeat="register in registers ">
+              <td> {{register.date}} </td>
+              <td> {{register.time}} </td>
+              <td> {{register.action | uppercase}} </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div id="sectionB" class="tab-pane fade">
-        <h3>Processed Data</h3>
-        <table class="table table-hover">
+        <h3 class="text-primary">Processed Data</h3>
+        <!--<table class="table table-hover">
           <thead>
             <tr>
               <th>Date</th>
@@ -62,8 +64,8 @@
               <td> {{record.totalWork.toString()}} </td>
             </tr>
           </tbody>
-        </table>
-      </div>
+        </table> -->
+      </div> 
     </div>
   </div>
   </div>
