@@ -25,10 +25,10 @@ app.use((req,res,next) => {
 
 // db data init
 //dataInit.removeEmployeeData();
-const employees = dataInit.employees;
+//const employees = dataInit.employees;
 // TO-DO: import it as a function with a path parameter 
-const registers = require('./config/registers_to_json');
-dataInit.loadInitDataToDb(employees,registers);
+//const registers = require('./config/registers_to_json');
+//dataInit.loadInitDataToDb(employees,registers);
 
 
 // Load routes
