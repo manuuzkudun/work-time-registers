@@ -13,7 +13,7 @@ router.get('/employee/:id', (req,res) =>{
       let vm = {
         msg: 'success',
         data: {
-          id: result._id,
+          _id: result._id,
           name: result.name,
           email: result.email,
           registers: result.registers.map(reg => { return {

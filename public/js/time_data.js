@@ -42,8 +42,8 @@ timeData.controller('myController', function ($scope, $http) {
   }
   
   function getEmployeeNames() {
-    $http.get('http://localhost:3000/api/registers').success(function (data) {
-      $scope.names = getProps(data, 'employeeName');  
+    $http.get('http://localhost:3000/api/employees/names').success(function (data) {
+      $scope.employees = data; 
     });
   }
   
@@ -73,7 +73,7 @@ timeData.controller('myController', function ($scope, $http) {
   }
   
   
-  $scope.getEmployeeData = function () {
+/*  $scope.getEmployeeData = function () {
 
       
     var url = 'http://localhost:3000/api/registers/1';
@@ -112,5 +112,5 @@ timeData.controller('myController', function ($scope, $http) {
       });
 
   });
-  }
+  }*/
 });
