@@ -20,6 +20,16 @@ router.get('/registers/:id', (req, res) => {
   });
 });
 
+/*router.get('/test', () => {
+  Register.find({ title: 'Once upon a timex.' })
+.populate('_creator')
+.exec(function (err, story) {
+  if (err) return handleError(err);
+  console.log('The creator is %s', story._creator.name);
+  // prints "The creator is Aaron"
+});*/
+  
+//});
 
 router.post('/registers',(req,res) => {
   var reg = new Register({

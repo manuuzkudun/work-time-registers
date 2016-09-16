@@ -1,6 +1,7 @@
 'use strict';
-
-const express = require('express')
+ 
+const _ = require('underscore')
+  , express = require('express')
   , reload = require('reload')
   , bodyParser = require('body-parser')
   , dataInit = require('./config/dataInit')
@@ -23,8 +24,11 @@ app.use((req,res,next) => {
 });
 
 // db data init
-//const employees = dataInit.employeeData;
-//dataInit.loadEmployeeData(employees);
+//dataInit.removeEmployeeData();
+const employees = dataInit.employees;
+// TO-DO: import it as a function with a path parameter 
+const registers = require('./config/registers_to_json');
+dataInit.loadInitDataToDb(employees,registers);
 
 
 // Load routes

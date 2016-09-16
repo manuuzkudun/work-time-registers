@@ -3,11 +3,20 @@
 const mongoose = require('mongoose'),
       db = require('../config/db');
 
-var Employee = mongoose.model('Employee', {
-  _id: String
-  , name: String
-  , email: String
-  , password: String
+
+const registerSchema = mongoose.Schema({
+  dateTime: Date,
+  action: String
 });
+
+const Employee = mongoose.model('Employee', {
+  _id: Number, 
+  name: String,
+  email: String,
+  password: String,
+  registers: [registerSchema]
+});
+
+
 
 module.exports = Employee;

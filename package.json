@@ -13,6 +13,7 @@
     "body-parser": "^1.15.2",
     "connect": "^3.4.1",
     "csv-parser": "^1.11.0",
+    "csvtojson": "^1.0.2",
     "dateformat": "^1.0.12",
     "ejs": "^2.5.1",
     "express": "^4.14.0",
