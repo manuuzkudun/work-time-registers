@@ -1,73 +1,44 @@
-var timeData = angular.module("timeData",[]);
-
-timeData.controller('myController', function ($scope, $http) {  
+var timeData = angular.module("timeData", []);
+timeData.controller('myController', function ($scope, $http) {
   $scope.data = null;
   $scope.dataProcessed = null;
   getEmployees();
-
-  
-$scope.sortByDate = function(register) {
+  $scope.sortByDate = function (register) {
     var date = new Date(register.dateTime);
     return date;
-};
+  };
 
-  function timeDifference(dateTime1,dateTime2){
-    var start = new Date(dateTime1);
-    var end = new Date(dateTime2);
-    return countdown(start,end); 
-  }
-    
   function getEmployees() {
     $http.get('http://localhost:3000/api/employees/names').success(function (data) {
-      $scope.employees = data; 
+      $scope.employees = data;
     });
   }
-  
-  function getSpecificRecord(records,reqDate, reqAction) {
-    var candidates = records.filter(function (record) {
-      return (record.Date == reqDate && record.Action == reqAction);
-        });
-    var out =  (candidates.length > 0) ? candidates[0] : {'Time': 'NO-DATA'};
-    return out;
-  }
-  
-  $scope.getEmployeeData = function () {  
+  $scope.getEmployeeData = function () {
     var url = 'http://localhost:3000/api/employee/1';
     $http.get(url).then(function (response) {
       var data = response.data.data;
       $scope.registers = data.registers;
       $scope.name = data.name;
       $scope.email = data.email;
-      
       var dates = getDates(data.registers);
       $scope.registersProcessed = dates.map(function (date) {
-        var dayRegisters = getDayRegisters(date,data.registers);
+        var dayRegisters = getDayRegisters(date, data.registers);
         var startWork = getStartWork(dayRegisters);
         var leaveWork = getLeaveWork(dayRegisters);
         var restStart = getRestStart(dayRegisters);
         var restEnd = getRestEnd(dayRegisters);
         var dateTime = dayRegisters[0].dateTime;
-        var totalRest = computeTotalRest(restStart,restEnd);
+        var totalRest = computeTotalRest(restStart, restEnd);
+        var totalWork = computeTotalWork(startWork, leaveWork);
         return ({
-          date: date, 
-          startWork: startWork.time,
-          endWork: leaveWork.time,
-          totalRest: totalRest, 
-          totalWork: 0,
-          dateTime:dateTime
+          date: date
+          , startWork: startWork.time
+          , endWork: leaveWork.time
+          , totalRest: totalRest
+          , totalWork: totalWork
+          , dateTime: dateTime
         });
       });
-      
     });
   };
-  
-      
-
-/*      $scope.dataProcessed = dates.map(function (date) {
-      
-      var totalWork = computeTotalWork(startWork,leaveWork);
-
-
-      });*/
-
 });
