@@ -10,8 +10,50 @@
     return hours + ":" + minutes + ":" + seconds;
   }*/
 
+function getDayRegisters(date,registers){
+  return _.where(registers, {date: date});
+}
+
+function getStartWork(dayRegisters){
+  var candidates = _.where(dayRegisters,{action: 'start'});
+  if (candidates.length > 0){
+    var index = 0;
+    return candidates[index];
+  } else {
+    return {dateTime: 'NO-DATA'};
+  }
+}
 
 
+function getLeaveWork(dayRegisters){
+  var candidates = _.where(dayRegisters,{action: 'leave'});
+  if (candidates.length > 0){
+    var index = candidates.length -1;
+    return candidates[index];
+  } else {
+    return {dateTime: 'NO-DATA'};
+  }
+}
+
+
+function getRestStart(dayRegisters){
+  var candidates = _.where(dayRegisters,{action: 'start-rest'});
+  if (candidates.length > 0){
+    return candidates;
+  } else {
+    return {dateTime: 'NO-DATA'};
+  }
+}
+
+
+function getRestEnd(dayRegisters){
+  var candidates = _.where(dayRegisters,{action: 'end-rest'});
+  if (candidates.length > 0){
+    return candidates;
+  } else {
+    return {dateTime: 'NO-DATA'};
+  }
+}
 
 function getDates(registers){
   var dates = _.unique(registers, function(register) {

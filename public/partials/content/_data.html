@@ -35,8 +35,8 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody> <!--| orderBy : sortByDate : true-->
-            <tr ng-repeat="register in registers ">
+          <tbody> <!---->
+            <tr ng-repeat="register in registers | orderBy : sortByDate : true">
               <td> {{register.date}} </td>
               <td> {{register.time}} </td>
               <td> {{register.action | uppercase}} </td>
@@ -46,7 +46,7 @@
       </div>
       <div id="sectionB" class="tab-pane fade">
         <h3 class="text-primary">Processed Data</h3>
-        <!--<table class="table table-hover">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>Date</th>
@@ -57,15 +57,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="record in dataProcessed  | orderBy : sortByDate : true">
-              <td> {{record.Date | date: "dd/M/yyyy"}} </td>
-              <td> {{record.startWork | date: "HH:mm:ss"}} </td>
-              <td> {{record.endWork | date: "HH:mm:ss"}} </td>
-              <td> {{record.totalRest}} </td>
-              <td> {{record.totalWork.toString()}} </td>
+            <tr ng-repeat="register in registersProcessed | orderBy : '-dateTime' ">
+              <td> {{register.date}} </td>
+              <td> {{register.startWork}} </td>
+              <td> {{register.endWork}} </td>
+              <td> {{register.totalRest}} </td>
+              <td> {{register.totalWork.toString()}} </td>
             </tr>
           </tbody>
-        </table> -->
+        </table>
       </div> 
     </div>
   </div>

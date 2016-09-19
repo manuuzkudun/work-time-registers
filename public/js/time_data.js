@@ -6,8 +6,8 @@ timeData.controller('myController', function ($scope, $http) {
   getEmployees();
 
   
-  $scope.sortComment = function(comment) {
-    var date = new Date(comment.dateTime);
+$scope.sortByDate = function(register) {
+    var date = new Date(register.dateTime);
     return date;
 };
 
@@ -40,43 +40,41 @@ timeData.controller('myController', function ($scope, $http) {
       $scope.email = data.email;
       
       var dates = getDates(data.registers);
-      console.log(dates);
-      
-
+      $scope.registersProcessed = dates.map(function (date) {
+        var dayRegisters = getDayRegisters(date,data.registers);
+        var startWork = getStartWork(dayRegisters);
+        var leaveWork = getLeaveWork(dayRegisters);
+        var restStart = getRestStart(dayRegisters);
+        var restStart = getRestEnd(dayRegisters);
+        var dateTime = dayRegisters[0].dateTime;
+        return ({
+          date: date, 
+          startWork: startWork.time,
+          endWork: leaveWork.time,
+          totalRest: 0, 
+          totalWork: 0,
+          dateTime:dateTime
+        });
+      });
       
     });
   };
   
-
-
-/*           var dates = _.unique(data,function(record){
-        return moment(record.dateTime).format("DD/MM/YYYY");
-      }).map(function(record){
-        return moment(record.dateTime).format("DD/MM/YYYY");
-      });*/
       
 
 /*      $scope.dataProcessed = dates.map(function (date) {
 
-        var dayRecords = data.filter(function(record){
-          return(moment(record.dateTime).format("DD/MM/YYYY") == date);
-        });
 
-      var startWork = _.where(dayRecords,{action: 'start'})[0] || {dateTime: 'NO-DATA'};
-      var leaveWork = _.where(dayRecords,{action: 'leave'})[0] || {dateTime: 'NO-DATA'};
+
+
+      
       var restStart = _.where(dayRecords,{action: 'start-rest'});
       var restStart = _.where(dayRecords,{action: 'start-rest'});
       var restEnd = _.where(dayRecords,{action: 'end-rest'});
       var totalRest = computeTotalRest(restStart,restEnd);
       var totalWork = computeTotalWork(startWork,leaveWork);
 
-        return ({
-          Date: date
-          , startWork: startWork.dateTime
-          , endWork: leaveWork.dateTime
-          , totalRest: totalRest.toString()
-          , totalWork: totalWork
-        });
+
       });*/
 
 });
