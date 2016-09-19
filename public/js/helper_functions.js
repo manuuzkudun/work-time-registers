@@ -78,8 +78,8 @@ function getDates(registers) {
 }
 
 function computeTotalWork(startWork, leaveWork) {
-  if (startWork.dateTime && leaveWork.dateTime) {
-    return timeDifference(startWork.dateTime, leaveWork.dateTime);
+  if (startWork && leaveWork) {
+    return timeDifference(startWork, leaveWork);
   }
   else {
     return 'NO-DATA';
