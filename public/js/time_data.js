@@ -38,10 +38,18 @@ timeData.controller('myController', function ($scope, $http) {
       $scope.registers = data.registers;
       $scope.name = data.name;
       $scope.email = data.email;
-      console.log(data.registers[0]);
+      
+      var dates = getDates(data.registers);
+      console.log(dates);
+      
+
+      
     });
   };
-/*            var dates = _.unique(data,function(record){
+  
+
+
+/*           var dates = _.unique(data,function(record){
         return moment(record.dateTime).format("DD/MM/YYYY");
       }).map(function(record){
         return moment(record.dateTime).format("DD/MM/YYYY");

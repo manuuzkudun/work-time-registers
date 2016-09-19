@@ -11,6 +11,17 @@
   }*/
 
 
+
+
+function getDates(registers){
+  var dates = _.unique(registers, function(register) {
+    return register.date;
+  }).map(function(register) {
+    return register.date;
+  });
+  return dates;     
+} 
+
   function computeTotalWork(startWork,leaveWork){
     if (startWork.dateTime && leaveWork.dateTime){
       return timeDifference(startWork.dateTime, leaveWork.dateTime);
