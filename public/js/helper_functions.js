@@ -1,14 +1,13 @@
-/*  function timeDifference(dateTime1, dateTime2) {
-    var diff = new Date(dateTime2) - new Date(dateTime1);
-    var seconds = diff / 1000;
-    var minutes = Math.floor(seconds / 60);
-    var hours = Math.floor(minutes / 60);
-    var days = Math.floor(hours / 24);
-    hours = hours - (days * 24);
-    minutes = minutes - (days * 24 * 60) - (hours * 60);
-    seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
-    return hours + ":" + minutes + ":" + seconds;
-  }*/
+function timeDifference(reg1, reg2){
+var start = reg1.date + " " + reg1.time;
+var end = reg2.date + " " + reg2.time;
+  
+return  moment.utc(moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss");
+  return a;
+  
+}
+
+
 
 function getDayRegisters(date,registers){
   return _.where(registers, {date: date});
@@ -74,7 +73,7 @@ function getDates(registers){
   
   function computeTotalRest(startRest,endRest){
     if ((startRest.length >0)  && (endRest.length > 0) && (startRest.length == endRest.length)) {
-         return timeDifference(startRest[0].dateTime,endRest[0].dateTime);
+         return timeDifference(startRest[0],endRest[0]);
     } else {
       return 'NO_DATA';
     }

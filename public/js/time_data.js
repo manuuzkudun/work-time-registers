@@ -45,13 +45,14 @@ $scope.sortByDate = function(register) {
         var startWork = getStartWork(dayRegisters);
         var leaveWork = getLeaveWork(dayRegisters);
         var restStart = getRestStart(dayRegisters);
-        var restStart = getRestEnd(dayRegisters);
+        var restEnd = getRestEnd(dayRegisters);
         var dateTime = dayRegisters[0].dateTime;
+        var totalRest = computeTotalRest(restStart,restEnd);
         return ({
           date: date, 
           startWork: startWork.time,
           endWork: leaveWork.time,
-          totalRest: 0, 
+          totalRest: totalRest, 
           totalWork: 0,
           dateTime:dateTime
         });
@@ -63,15 +64,7 @@ $scope.sortByDate = function(register) {
       
 
 /*      $scope.dataProcessed = dates.map(function (date) {
-
-
-
-
       
-      var restStart = _.where(dayRecords,{action: 'start-rest'});
-      var restStart = _.where(dayRecords,{action: 'start-rest'});
-      var restEnd = _.where(dayRecords,{action: 'end-rest'});
-      var totalRest = computeTotalRest(restStart,restEnd);
       var totalWork = computeTotalWork(startWork,leaveWork);
 
 
