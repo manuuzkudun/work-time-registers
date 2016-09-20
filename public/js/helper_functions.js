@@ -10,6 +10,40 @@ function getDayRegisters(date, registers) {
   });
 }
 
+function sumTimeDurations(timeStringArray){
+  
+  var secs = 0, mins = 0, hours = 0;
+  for (i= 0; i < timeStringArray.length; i++){
+    var t = getHoursMinsSecs(timeStringArray[i]);
+    var secsSum = t.secs + secs;
+    secs = secsSum % 60;
+    var secsMins = Math.floor(parseInt(secsSum / 60));
+    var minsSum = t.mins + mins + secsMins;
+    mins = minsSum % 60;
+    var minsHours = Math.floor(parseInt(minsSum / 60));
+    hours = t.hours + hours + minsHours;
+  }
+  return formatTimeNumber(hours) + ":" + formatTimeNumber(mins) + ":" +  formatTimeNumber(secs); 
+}
+
+
+function getHoursMinsSecs(timeString){
+  var timeArray = timeString.split(':');
+  return {
+    hours: parseInt(timeArray[0]),
+    mins: parseInt(timeArray[1]),
+    secs: parseInt(timeArray[2])
+  }
+}
+
+function formatTimeNumber(number){
+  var numberString = number.toString();
+  if (numberString.length == 1) {
+    numberString = "0" + numberString;
+  }
+  return numberString;
+}
+
 function getStartWork(dayRegisters) {
   var candidates = _.where(dayRegisters, {
     action: 'start'
@@ -79,7 +113,7 @@ function getDates(registers) {
 
 function computeTotalWork(startWork, leaveWork) {
   if (startWork && leaveWork) {
-    return timeDifference(startWork, leaveWork);
+    return timeDifference(startWork, leaveWork) ;
   }
   else {
     return 'NO-DATA';
@@ -101,7 +135,11 @@ function computeTotalRest(startRest, endRest) {
   var startRestSorted = sortRegistersByDate(startRest);
   var endRestSorted = sortRegistersByDate(endRest);
   if ( isRestDataCorrect(startRestSorted, endRestSorted) ) {
-    return timeDifference(startRestSorted[0], endRestSorted[0]);
+    var restDurations = [];
+    for (i=0; i < startRest.length; i++){
+      restDurations.push( timeDifference(startRestSorted[i], endRestSorted[i]) );
+    }
+    return sumTimeDurations(restDurations);
   } else {
     return 'NO_DATA';
   }
