@@ -1,5 +1,5 @@
-var timeData = angular.module("timeData", []);
-timeData.controller('myController', function ($scope, $http) {
+var registersData = angular.module("registersData", []);
+registersData.controller('RegistersController', function ($scope, $http) {
   $scope.data = null;
   $scope.dataProcessed = null;
   getEmployees();
