@@ -2,8 +2,8 @@
 
 const express = require('express'),
       router = express.Router(),
-      Employee = require("../models/Employee");
-      service = require('../utils/service');
+      Employee = require("../models/Employee"),
+      service = require('../middleware/service');
 
 
 /*router.post('/signup', (req,res) => {
