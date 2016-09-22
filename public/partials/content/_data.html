@@ -1,3 +1,12 @@
+<style>
+.warning > td.total-rest {
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+</style>
+
+
 <section ng-controller="RegistersController">
   <div class="row">
   <div class="col-md-4">
@@ -63,9 +72,9 @@
               <td> {{register.date}} </td>
               <td> {{register.startWork}} </td>
               <td> {{register.endWork}} </td>
-              <td> {{register.totalRest}} </td>
+              <td class="total-rest"> {{register.totalRest}} </td>
               <td> {{register.totalWork.toString()}} </td>
-              <td><span style="color: red;font-weight: bold;">{{showError(register)}}</span></td>
+              <td><a href="#"><button type="button" class="btn btn-info btn-xs">Show Registers</button></a></td>
             </tr>
           </tbody>
         </table>

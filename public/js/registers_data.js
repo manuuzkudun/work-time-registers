@@ -3,6 +3,7 @@ registersData.controller('RegistersController', function ($scope, $http) {
   $scope.data = null;
   $scope.dataProcessed = null;
   getEmployees();
+
   $scope.sortByDate = function (register) {
     var date = new Date(register.dateTime);
     return date;
