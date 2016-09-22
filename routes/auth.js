@@ -17,7 +17,7 @@ const express = require('express'),
 });*/
 
 
-/*router.post('/login', (req,res) => {
+router.post('/login', (req,res) => {
   Employee.findOne({email: req.body.email.toLowerCase()}, (err, user) => {
     if (err) throw err;
     if (user) {
@@ -31,7 +31,8 @@ const express = require('express'),
     } else {
       
     }
-});*/
+});
+});
 
 //router.get('/private',middleware.ensureAuthenticated, function(req, res) {...} );
 

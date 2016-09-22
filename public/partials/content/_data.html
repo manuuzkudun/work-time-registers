@@ -23,7 +23,7 @@
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#sectionA">Raw Data</a></li>
       <li><a data-toggle="tab" data-target="#sectionB">Processed Data</a></li>
-      <li><a data-toggle="tab" data-target="#sectionC">Data Problems</a></li>
+      <li><a data-toggle="tab" data-target="#sectionC">Summary</a></li>
     </ul>
     <div class="tab-content">
       <div id="sectionA" class="tab-pane fade in active">
@@ -55,21 +55,23 @@
               <th>Leave Work</th>
               <th>Total Rest</th>
               <th>Total Work</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="register in registersProcessed | orderBy : '-dateTime' ">
+            <tr ng-repeat="register in registersProcessed | orderBy : '-dateTime'" ng-class="{warning: register.totalRest == 'no-data'}">
               <td> {{register.date}} </td>
               <td> {{register.startWork}} </td>
               <td> {{register.endWork}} </td>
               <td> {{register.totalRest}} </td>
               <td> {{register.totalWork.toString()}} </td>
+              <td><span style="color: red;font-weight: bold;">{{showError(register)}}</span></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div id="sectionC" class="tab-pane fade">
-        <h3 class="text-primary">Problems with the data</h3>
+        <h3 class="text-primary">Summary</h3>
       </div>
     </div>
   </div>

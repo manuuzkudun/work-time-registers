@@ -13,6 +13,11 @@ registersData.controller('RegistersController', function ($scope, $http) {
       $scope.employees = data;
     });
   }
+  
+  $scope.showError = function(register) {
+      return register.totalRest == 'no-data' ? 'ERROR' : '';
+  };
+  
   $scope.getEmployeeData = function () {
     var url = 'http://localhost:3000/api/employee/1';
     $http.get(url).then(function (response) {

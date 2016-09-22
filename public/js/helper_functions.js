@@ -54,7 +54,7 @@ function getStartWork(dayRegisters) {
   }
   else {
     return {
-      dateTime: 'NO-DATA'
+      dateTime: 'no-data'
     };
   }
 }
@@ -69,7 +69,7 @@ function getLeaveWork(dayRegisters) {
   }
   else {
     return {
-      dateTime: 'NO-DATA'
+      dateTime: 'no-data'
     };
   }
 }
@@ -83,7 +83,7 @@ function getRestStart(dayRegisters) {
   }
   else {
     return {
-      dateTime: 'NO-DATA'
+      dateTime: 'no-data'
     };
   }
 }
@@ -97,7 +97,7 @@ function getRestEnd(dayRegisters) {
   }
   else {
     return {
-      dateTime: 'NO-DATA'
+      dateTime: 'no-data'
     };
   }
 }
@@ -116,7 +116,7 @@ function computeTotalWork(startWork, leaveWork) {
     return timeDifference(startWork, leaveWork) ;
   }
   else {
-    return 'NO-DATA';
+    return 'no-data';
   }
 }
 
@@ -141,6 +141,6 @@ function computeTotalRest(startRest, endRest) {
     }
     return sumTimeDurations(restDurations);
   } else {
-    return 'NO_DATA';
+    return 'no-data';
   }
 }
