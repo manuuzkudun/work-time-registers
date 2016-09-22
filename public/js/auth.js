@@ -28,12 +28,10 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
   }
 });
 
-
 auth.controller("LogoutController", function ($scope, $auth, $location) {
   $scope.logout = function(){
     $auth.logout()
       .then(function() {
-        // Disconnect the user and redirect it
         $location.path("/")
       });
   };

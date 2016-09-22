@@ -16,7 +16,8 @@ myApp.config(function ($routeProvider, $authProvider) {
     templateUrl: "./partials/content/_login.html",
     controller: "LoginController"
   }).when("/signup", {
-    templateUrl: "./partials/content/_signup.html"
+    templateUrl: "./partials/content/_signup.html",
+    controller: "SignUpController"
   }).when("/logout", {
     templateUrl: null,
     controller: "LogoutController"
