@@ -28,5 +28,9 @@ angular.module('data').factory('dataFactory', ['$http', function ($http) {
   };
   */
   
+  dataFactory.getEmployeeNames = function(){
+    return $http.get('http://localhost:3000/api/employees/names');
+  }
+  
   return dataFactory;
 }]);

@@ -1,0 +1,12 @@
+    <form class="form-group">
+      <label for="sel1" class="control-label">Select a employee </label>
+      <div class="row">
+        <div class="col-xs-8">
+         <select class="form-control" data-style="btn-primary" id="sel1" ng-model="selEmployee" ng-options="employee.name for employee in employees" title="Choose employee..."> </select>
+        </div>
+        <div class="col-xs-4">
+         <button type="button" class="btn btn-primary" ng-click="getEmployeeData()">Go!</button>
+        </div>
+      </div>
+      
+    </form>    

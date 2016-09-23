@@ -11,22 +11,19 @@ router.get('/employee/:id', (req,res) =>{
     if (err) throw err;
     if (result) {
       let vm = {
-        msg: 'success',
-        data: {
-          _id: result._id,
-          name: result.name,
-          email: result.email,
-          registers: result.registers.map(reg => { return {
-            dateTime: reg.dateTime,
-            date: dateFormat(reg.dateTime,"dd/mm/yyyy"),
-            time: dateFormat(reg.dateTime,"HH:MM:ss"),
-            action: reg.action
+        _id: result._id,
+        name: result.name,
+        email: result.email,
+        registers: result.registers.map(reg => { return {
+          dateTime: reg.dateTime,
+          date: dateFormat(reg.dateTime,"dd/mm/yyyy"),
+          time: dateFormat(reg.dateTime,"HH:MM:ss"),
+          action: reg.action
           }
         })
-      }
-    };
-    res.json(vm);
-  } else {
+      };
+      res.json(vm);
+    } else {
       res.json({msg: 'no-data'});
     }
   });

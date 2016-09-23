@@ -1,51 +1,65 @@
 var myData = angular.module("data", []);
 
-myData.controller('DataController', function ($scope, $http, $routeParams) {
+myData.controller('DataController', function ($scope, $http, $routeParams, dataFactory) {
+  
+  var data = null;
   $scope.data = null;
   $scope.dataProcessed = null;
-  getEmployees();
+  $scope.registersProcessed = null;
+  getData();
+  getEmployees($scope.registers);
 
   $scope.sortByDate = function (register) {
     var date = new Date(register.dateTime);
     return date;
   };
 
+  $scope.showError = function(register) {
+    return register.totalRest == 'no-data' ? 'ERROR' : '';
+  };
+  
+  function getData() {
+    var id = $routeParams.id;
+    dataFactory.getEmployeeData(id)
+      .then(function (response) {
+        data = response.data;
+        $scope.registers = data.registers;
+        $scope.name = data.name;
+        $scope.email = data.email;
+        $scope.registersProcessed = processData(data.registers);
+      }, function (error) {
+        $scope.status = 'Unable to load customer data: ' + error.message;
+      });
+    }
+  
   function getEmployees() {
-    $http.get('http://localhost:3000/api/employees/names').success(function (data) {
-      $scope.employees = data;
+    dataFactory.getEmployeeNames()
+      .then(function(res) {
+      $scope.employees = res.data;      
     });
   }
-  
-  $scope.showError = function(register) {
-      return register.totalRest == 'no-data' ? 'ERROR' : '';
-  };
-  
-  $scope.getEmployeeData = function () {
-    var url = 'http://localhost:3000/api/employee/1';
-    $http.get(url).then(function (response) {
-      var data = response.data.data;
-      $scope.registers = data.registers;
-      $scope.name = data.name;
-      $scope.email = data.email;
-      var dates = getDates(data.registers);
-      $scope.registersProcessed = dates.map(function (date) {
-        var dayRegisters = getDayRegisters(date, data.registers);
-        var startWork = getStartWork(dayRegisters);
-        var leaveWork = getLeaveWork(dayRegisters);
-        var restStart = getRestStart(dayRegisters);
-        var restEnd = getRestEnd(dayRegisters);
-        var dateTime = dayRegisters[0].dateTime;
-        var totalRest = computeTotalRest(restStart, restEnd);
-        var totalWork = computeTotalWork(startWork, leaveWork);
-        return ({
-          date: date
-          , startWork: startWork.time
-          , endWork: leaveWork.time
-          , totalRest: totalRest
-          , totalWork: totalWork
-          , dateTime: dateTime
-        });
+
+  function processData(registers) {
+    var dates = getDates(registers);
+    return  dates.map(function (date) {
+      var dayRegisters = getDayRegisters(date, registers);
+      var startWork = getStartWork(dayRegisters);
+      var leaveWork = getLeaveWork(dayRegisters);
+      var restStart = getRestStart(dayRegisters);
+      var restEnd = getRestEnd(dayRegisters);
+      var dateTime = dayRegisters[0].dateTime;
+      var totalRest = computeTotalRest(restStart, restEnd);
+      var totalWork = computeTotalWork(startWork, leaveWork);
+      return ({
+        date: date,
+        startWork: startWork.time,
+        endWork: leaveWork.time,
+        totalRest: totalRest,
+        totalWork: totalWork,
+        dateTime: dateTime
       });
     });
-  };
+ }
+
+
 });

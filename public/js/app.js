@@ -12,7 +12,7 @@ myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
   $routeProvider.when("/home", {
     templateUrl: "./partials/content/_home.html",
     
-  }).when("/data", {
+  }).when("/data/:id", {
     templateUrl: "./partials/content/_data.html"
   }).when("/login", {
     templateUrl: "./partials/content/_login.html",
