@@ -53,9 +53,7 @@ function getStartWork(dayRegisters) {
     return candidates[index];
   }
   else {
-    return {
-      dateTime: 'no-data'
-    };
+    return 'no-data';
   }
 }
 
@@ -68,9 +66,7 @@ function getLeaveWork(dayRegisters) {
     return candidates[index];
   }
   else {
-    return {
-      dateTime: 'no-data'
-    };
+    return 'no-data';
   }
 }
 
@@ -82,9 +78,7 @@ function getRestStart(dayRegisters) {
     return candidates;
   }
   else {
-    return {
-      dateTime: 'no-data'
-    };
+    return 'no-data';
   }
 }
 
@@ -96,9 +90,7 @@ function getRestEnd(dayRegisters) {
     return candidates;
   }
   else {
-    return {
-      dateTime: 'no-data'
-    };
+    return 'no-data';
   }
 }
 
@@ -112,7 +104,7 @@ function getDates(registers) {
 }
 
 function computeTotalWork(startWork, leaveWork) {
-  if (startWork && leaveWork) {
+  if (startWork && leaveWork && startWork != 'no-data' && leaveWork != 'no-data') {
     return timeDifference(startWork, leaveWork) ;
   }
   else {
@@ -128,13 +120,13 @@ function sortRegistersByDate(registers){
 }
 
 function isRestDataCorrect(startRest, endRest) {
-  return (startRest.length > 0) && (endRest.length > 0) && (startRest.length == endRest.length);
+  return (startRest.length > 0) && (endRest.length > 0) && (startRest.length == endRest.length) && (startRest != 'no-data') && (endRest != 'no-data');
 }
 
 function computeTotalRest(startRest, endRest) {
-  var startRestSorted = sortRegistersByDate(startRest);
-  var endRestSorted = sortRegistersByDate(endRest);
-  if ( isRestDataCorrect(startRestSorted, endRestSorted) ) {
+  if ( isRestDataCorrect(startRest, endRest) ) {
+    var startRestSorted = sortRegistersByDate(startRest);
+    var endRestSorted = sortRegistersByDate(endRest);
     var restDurations = [];
     for (i=0; i < startRest.length; i++){
       restDurations.push( timeDifference(startRestSorted[i], endRestSorted[i]) );

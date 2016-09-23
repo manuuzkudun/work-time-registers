@@ -1,11 +1,13 @@
 var myApp = angular.module("myApp", ["ngRoute", "registersData","satellizer","auth"]);
 
-myApp.config(function ($routeProvider, $authProvider) {
+myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
   
   $authProvider.loginUrl = "/auth/login";
   $authProvider.signupUrl = "/auth/signup";
   $authProvider.tokenName = "token";
   $authProvider.tokenPrefix = "myApp"
+  
+  //$locationProvider.html5Mode(true);
   
   $routeProvider.when("/home", {
     templateUrl: "./partials/content/_home.html",
@@ -24,5 +26,7 @@ myApp.config(function ($routeProvider, $authProvider) {
   }).otherwise({
     redirectTo: '/home'
   });
+  
+  
   
 });

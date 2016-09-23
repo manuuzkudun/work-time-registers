@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h3 class="text-primary">Processed Data</h3>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Start Work</th>
+      <th>Leave Work</th>
+      <th>Total Rest</th>
+      <th>Total Work</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="register in registersProcessed | orderBy : '-dateTime'" ng-class="{warning: register.totalRest == 'no-data'}">
+      <td> {{register.date}} </td>
+      <td> {{register.startWork}} </td>
+      <td> {{register.endWork}} </td>
+      <td class="control-data"> {{register.totalRest}} </td>
+      <td class="control-data"> {{register.totalWork.toString()}} </td>
+      <td>
+        <a href="#">
+          <button type="button" class="btn btn-info btn-xs">Show Registers</button>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
