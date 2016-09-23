@@ -24,7 +24,10 @@ router.post('/login', (req,res) => {
       if (req.body.password == user.password ) {
         return res
           .status(200)
-          .send({token: service.createToken(user)});
+          .send({
+            token: service.createToken(user),
+            userId: user._id
+          });
       } else {
         
       }

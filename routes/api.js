@@ -24,7 +24,7 @@ router.get('/employee/:id', (req,res) =>{
       };
       res.json(vm);
     } else {
-      res.json({msg: 'no-data'});
+      return res.json({ message: 'Employee not found.' });
     }
   });
 });

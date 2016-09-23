@@ -20,8 +20,9 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
       email: $scope.email,
       password: $scope.password
     })
-    .then(function(){
-      $location.path("/data")
+    .then(function(res){
+      var id = res.data.userId;
+      $location.path("/data/" + id);
     })
     .catch(function(response){
     });
@@ -29,12 +30,13 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
 });
 
 auth.controller("LogoutController", function ($scope, $auth, $location) {
-  $scope.logout = function(){
+  function logout() {
     $auth.logout()
       .then(function() {
         $location.path("/")
-      });
-  };
+      }); 
+  }
+  logout();
 });
 
 
