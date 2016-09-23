@@ -29,14 +29,13 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
   }
 });
 
-auth.controller("LogoutController", function ($scope, $auth, $location) {
-  function logout() {
+auth.controller("NavBarController", function ($scope, $auth, $location) {
+  $scope.logout = function () {
     $auth.logout()
       .then(function() {
         $location.path("/")
       }); 
-  }
-  logout();
+  };
 });
 
 

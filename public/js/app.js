@@ -20,9 +20,6 @@ myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
   }).when("/signup", {
     templateUrl: "./partials/content/_signup.html",
     controller: "SignUpController"
-  }).when("/logout", {
-    templateUrl: null,
-    controller: "LogoutController"
   }).otherwise({
     redirectTo: '/home'
   });
