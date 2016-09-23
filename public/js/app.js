@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp", ["ngRoute", "registersData","satellizer","auth"]);
+var myApp = angular.module("myApp", ["ngRoute", "data","satellizer","auth"]);
 
 myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
   

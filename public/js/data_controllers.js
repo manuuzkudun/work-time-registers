@@ -1,5 +1,6 @@
-var registersData = angular.module("registersData", []);
-registersData.controller('RegistersController', function ($scope, $http, $routeParams) {
+var myData = angular.module("data", []);
+
+myData.controller('DataController', function ($scope, $http, $routeParams) {
   $scope.data = null;
   $scope.dataProcessed = null;
   getEmployees();
