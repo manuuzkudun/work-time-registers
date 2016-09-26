@@ -1,13 +1,13 @@
 var myData = angular.module("data", []);
 
-myData.controller('DataController', function ($scope, $http, $routeParams, dataFactory) {
+myData.controller('DataController', function ($scope, $http, $routeParams, dataFactory,messageCenterService) {
   
   var data = null;
   $scope.data = null;
   $scope.dataProcessed = null;
   $scope.registersProcessed = null;
-  getData();
-  getEmployees($scope.registers);
+  getDataIfLogged();
+  //getEmployees($scope.registers);
 
   $scope.sortByDate = function (register) {
     var date = new Date(register.dateTime);
@@ -18,16 +18,15 @@ myData.controller('DataController', function ($scope, $http, $routeParams, dataF
     return register.totalRest == 'no-data' ? 'ERROR' : '';
   };
   
-  function getData() {
-    var id = $routeParams.id;
-    dataFactory.getEmployeeData(id)
-      .then(function (response) {
+  function getDataIfLogged() {
+    dataFactory.getAuthorizedData()
+      .then(function(response){
         data = response.data;
         $scope.registers = data.registers;
         $scope.name = data.name;
         $scope.email = data.email;
         $scope.registersProcessed = processData(data.registers);
-      }, function (error) {
+    }, function (error) {
         $scope.status = 'Unable to load customer data: ' + error.message;
       });
     }

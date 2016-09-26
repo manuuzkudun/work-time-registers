@@ -8,7 +8,6 @@ exports.ensureAuthenticated = function(req, res, next) {
       .status(403)
       .send({message: "Your request doesn't have an authorization header"});
   }
-
   var token = req.headers.authorization.split(" ")[1];
   var payload = jwt.decode(token, config.TOKEN_SECRET);
 
@@ -17,7 +16,6 @@ exports.ensureAuthenticated = function(req, res, next) {
       .status(401)
       .send({message: "The token has expired"});
   }
-
   req.user = payload.sub;
   next();
 }

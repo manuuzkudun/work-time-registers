@@ -3,10 +3,12 @@
 const express = require('express'),
       router = express.Router(),
       Employee = require("../models/Employee"),
-      service = require('../middleware/service');
+      service = require('../middleware/service'),
+      dateFormat = require('dateformat'),
+      middleware = require('../middleware/middleware');
 
 
-/*router.post('/signup', (req,res) => {
+router.post('/signup', (req,res) => {
   const employee = new Employee(req.body);
   employee.save( err => {
     if (err) throw err;
@@ -14,7 +16,7 @@ const express = require('express'),
       .status(200)
       .send({token: service.createToken(employee)});
   }); 
-});*/
+});
 
 
 router.post('/login', (req,res) => {
@@ -37,6 +39,27 @@ router.post('/login', (req,res) => {
 });
 });
 
-//router.get('/private',middleware.ensureAuthenticated, function(req, res) {...} );
+router.get('/private',middleware.ensureAuthenticated, (req,res) => {
+  Employee.findOne({_id: req.user}, (err,user) => {
+    if (err) throw err;
+    if (user){
+      let vm = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        registers: user.registers.map(reg => { return {
+          dateTime: reg.dateTime,
+          date: dateFormat(reg.dateTime,"dd/mm/yyyy"),
+          time: dateFormat(reg.dateTime,"HH:MM:ss"),
+          action: reg.action
+          }
+        })
+      };
+      res.json(vm);
+    } else {
+      
+    }
+  });
+});
 
 module.exports = router;

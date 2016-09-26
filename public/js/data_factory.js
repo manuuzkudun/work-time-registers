@@ -11,6 +11,10 @@ angular.module('data').factory('dataFactory', ['$http', function ($http) {
     return $http.get(urlBase + '/' + id);
   };
   
+  dataFactory.getAuthorizedData = function () {
+    return $http.get('/auth/private');
+  };
+  
 /*  dataFactory.insertEmployee = function (cust) {
     return $http.post(urlBase, cust);
   };*/

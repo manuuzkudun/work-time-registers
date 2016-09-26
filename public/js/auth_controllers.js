@@ -21,8 +21,8 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
       password: $scope.password
     })
     .then(function(res){
-      var id = res.data.userId;
-      $location.path("/data/" + id);
+     // var id = res.data.userId;
+      $location.path("/data");
     })
     .catch(function(response){
     });
@@ -30,6 +30,11 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
 });
 
 auth.controller("NavBarController", function ($scope, $auth, $location) {
+  
+  $scope.isAuthenticated = function() {
+    return $auth.isAuthenticated();
+  };
+  
   $scope.logout = function () {
     $auth.logout()
       .then(function() {

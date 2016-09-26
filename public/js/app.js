@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp", ["ngRoute", "data","satellizer","auth"]);
+var myApp = angular.module("myApp", ["ngRoute", "data","satellizer","auth","MessageCenterModule"]);
 
 myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
   
@@ -12,7 +12,7 @@ myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
   $routeProvider.when("/home", {
     templateUrl: "./partials/content/_home.html",
     
-  }).when("/data/:id", {
+  }).when("/data", {
     templateUrl: "./partials/content/_data.html"
   }).when("/login", {
     templateUrl: "./partials/content/_login.html",

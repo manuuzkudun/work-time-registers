@@ -2,7 +2,7 @@ const jwt = require('jwt-simple'),
       moment = require('moment'),
       config = require('../config/auth_config');
 
-exports.createToken = user => {  
+exports.createToken = (user) => {  
   var payload = {
     sub: user._id,
     iat: moment().unix(),
