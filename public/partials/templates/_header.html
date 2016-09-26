@@ -8,6 +8,8 @@
         <li><a href="#signup" >Sign up</a></li>
       </ul>
       <ul  class="nav navbar-nav navbar-right" ng-if="isAuthenticated()">
+        <li><a href="#">{{user.name}}</a></li>
+        <li><a href="#data">Data</a></li>
         <li><a ng-click="logout()">Logout</a></li>
       </ul>
     </div>

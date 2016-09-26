@@ -1,6 +1,6 @@
 var myData = angular.module("data", []);
 
-myData.controller('DataController', function ($scope, $http, $routeParams, dataFactory,messageCenterService) {
+myData.controller('DataController', function ($scope, $http, dataFactory,messageCenterService,$rootScope) {
   
   var data = null;
   $scope.data = null;
@@ -23,8 +23,10 @@ myData.controller('DataController', function ($scope, $http, $routeParams, dataF
       .then(function(response){
         data = response.data;
         $scope.registers = data.registers;
-        $scope.name = data.name;
-        $scope.email = data.email;
+        $rootScope.user = {
+          name: data.name,
+          email:data.email
+        };
         $scope.registersProcessed = processData(data.registers);
     }, function (error) {
         $scope.status = 'Unable to load customer data: ' + error.message;
