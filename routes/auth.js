@@ -27,8 +27,7 @@ router.post('/login', (req,res) => {
         return res
           .status(200)
           .send({
-            token: service.createToken(user),
-            userId: user._id
+            token: service.createToken(user)
           });
       } else {
         
@@ -43,21 +42,22 @@ router.get('/private',middleware.ensureAuthenticated, (req,res) => {
   Employee.findOne({_id: req.user}, (err,user) => {
     if (err) throw err;
     if (user){
-      let vm = {
+      const data = {
         _id: user._id,
         name: user.name,
         email: user.email,
-        registers: user.registers.map(reg => { return {
-          dateTime: reg.dateTime,
-          date: dateFormat(reg.dateTime,"dd/mm/yyyy"),
-          time: dateFormat(reg.dateTime,"HH:MM:ss"),
-          action: reg.action
-          }
+        registers: user.registers.map( (reg) => { 
+          return {
+            dateTime: reg.dateTime,
+            date: dateFormat(reg.dateTime,"dd/mm/yyyy"),
+            time: dateFormat(reg.dateTime,"HH:MM:ss"),
+            action: reg.action
+          };
         })
       };
-      res.json(vm);
+      res.json(data);
     } else {
-      
+      res.status(400).send({ message: 'User is not logged' });
     }
   });
 });

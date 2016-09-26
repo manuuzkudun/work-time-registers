@@ -21,7 +21,6 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
       password: $scope.password
     })
     .then(function(res){
-     // var id = res.data.userId;
       $location.path("/data");
     })
     .catch(function(response){

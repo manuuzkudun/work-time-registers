@@ -3,10 +3,11 @@
 const express = require('express'),
       router = express.Router(),
       dateFormat = require('dateformat'),
-      Employee = require("../models/Employee");
+      Employee = require("../models/Employee"),
+      middleware = require('../middleware/middleware');
 
 
-router.get('/employee/:id', (req,res) =>{
+router.get('/employee/:id', middleware.ensureAuthenticated, (req,res) =>{
   Employee.findById({_id: req.params.id}, (err,result) => {
     if (err) throw err;
     if (result) {
