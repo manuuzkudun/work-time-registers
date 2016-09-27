@@ -3,8 +3,7 @@
 const express = require('express'),
       router = express.Router(),
       Employee = require("../models/Employee"),
-      token = require('../services/token'),
-      dateFormat = require('dateformat');
+      token = require('../services/token');
 
 
 router.post('/signup', (req,res) => {

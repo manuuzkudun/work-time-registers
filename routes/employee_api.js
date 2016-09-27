@@ -15,6 +15,7 @@ router.get('/employee',middleware.ensureAuthenticated, (req,res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        admin: user.admin,
         registers: user.registers.map( (reg) => { 
           return {
             dateTime: reg.dateTime,

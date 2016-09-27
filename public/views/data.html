@@ -11,12 +11,15 @@
 <section ng-controller="DataController">
   <div class="row">
   <div class="col-md-4">
+    <div ng-show="user.admin">
+      <ng-include src="'/views/partials/select_employee_form.html'"></ng-include>
+    </div> 
     <div ng-show="user">
       <h3 class="text-primary">{{user.name}}</h3>
       <img class="img-responsive" src="http://placehold.it/150x200" alt ="{{user.name}}">
     </div>
   </div>
-
+    
   <div class = "col-md-8" ng-show="registers">
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#sectionA">Raw Data</a></li>

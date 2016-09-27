@@ -21,14 +21,13 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
   function getDataIfLogged() {
     dataFactory.getAuthorizedData()
       .then(function(response){
-      
         data = response.data;
-        $scope.registers = data.registers;
+        $scope.registers = data.registers;  
         $rootScope.user = {
           name: data.name,
-          email:data.email
+          email: data.email,
+          admin: data.admin
         };
-      
         var message = 'You are logged as <strong>' + data.name + '</strong>';
         var id = Flash.create('success', message, 3000, {class: 'custom-class', id: 'custom-id'}, true);
       

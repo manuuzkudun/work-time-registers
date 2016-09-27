@@ -8,19 +8,23 @@ exports.employees = [
     _id: 1,
     name: 'Manu Uzkudun',
     email: 'uzkudun@mdpi.com',
-    password: '12345'
+    password: '12345',
+    admin: false
   },
   {
     _id: 2,
     name: 'Isabel Martínez',
     email: 'martinez@mdpi.com',
-    password: '12345'
+    password: '12345',
+    admin: true
+    
   },
   {
     _id: 3,
     name: 'Lidia García',
     email: 'martinez@mdpi.com',
-    password: '12345'
+    password: '12345',
+    admin: false
   }
 ];
 

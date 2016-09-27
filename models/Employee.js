@@ -14,7 +14,8 @@ const Employee = mongoose.model('Employee', {
   name: String,
   email: String,
   password: String,
-  registers: [registerSchema]
+  registers: [registerSchema],
+  admin: Boolean
 });
 
 
