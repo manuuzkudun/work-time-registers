@@ -13,12 +13,12 @@ myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
     templateUrl: "./partials/content/_home.html",
     
   }).when("/data", {
-    templateUrl: "./partials/content/_data.html"
+    templateUrl: "./views/data.html"
   }).when("/login", {
-    templateUrl: "./partials/content/_login.html",
+    templateUrl: "./views/login.html",
     controller: "LoginController"
   }).when("/signup", {
-    templateUrl: "./partials/content/_signup.html",
+    templateUrl: "./views/signup.html",
     controller: "SignUpController"
   }).otherwise({
     redirectTo: '/home'
