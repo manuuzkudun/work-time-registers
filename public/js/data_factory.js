@@ -12,7 +12,7 @@ angular.module('data').factory('dataFactory', ['$http', function ($http) {
   };
   
   dataFactory.getAuthorizedData = function () {
-    return $http.get('/auth/private');
+    return $http.get('/api/employee');
   };
   
 /*  dataFactory.insertEmployee = function (cust) {
