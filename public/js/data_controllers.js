@@ -1,6 +1,6 @@
 var myData = angular.module("data", []);
 
-myData.controller('DataController', function ($scope, $http, dataFactory,messageCenterService,$rootScope) {
+myData.controller('DataController', function ($scope, $http, dataFactory,$rootScope, Flash) {
   
   var data = null;
   $scope.data = null;
@@ -21,12 +21,17 @@ myData.controller('DataController', function ($scope, $http, dataFactory,message
   function getDataIfLogged() {
     dataFactory.getAuthorizedData()
       .then(function(response){
+      
         data = response.data;
         $scope.registers = data.registers;
         $rootScope.user = {
           name: data.name,
           email:data.email
         };
+      
+        var message = 'You are logged as <strong>' + data.name + '</strong>';
+        var id = Flash.create('success', message, 3000, {class: 'custom-class', id: 'custom-id'}, true);
+      
         $scope.registersProcessed = processData(data.registers);
     }, function (error) {
         $scope.status = 'Unable to load customer data: ' + error.message;

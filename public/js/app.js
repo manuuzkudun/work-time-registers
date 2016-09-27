@@ -1,7 +1,7 @@
-var myApp = angular.module("myApp", ["ngRoute", "data","satellizer","auth","MessageCenterModule"]);
+var myApp = angular.module("myApp", ["ngRoute", "data","satellizer","auth","ngFlash"]);
 
 myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
-  
+   
   $authProvider.loginUrl = "/auth/login";
   $authProvider.signupUrl = "/auth/signup";
   $authProvider.tokenName = "token";
@@ -10,20 +10,19 @@ myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
   //$locationProvider.html5Mode(true);
   
   $routeProvider.when("/home", {
-    templateUrl: "./partials/content/_home.html",
+    templateUrl: "/views/home.html",
     
   }).when("/data", {
-    templateUrl: "./views/data.html"
+    templateUrl: "/views/data.html"
   }).when("/login", {
-    templateUrl: "./views/login.html",
+    templateUrl: "/views/login.html",
     controller: "LoginController"
   }).when("/signup", {
-    templateUrl: "./views/signup.html",
+    templateUrl: "/views/signup.html",
     controller: "SignUpController"
   }).otherwise({
     redirectTo: '/home'
   });
-  
-  
+
   
 });

@@ -25,9 +25,9 @@
   <script src="./components/angular/angular.min.js"></script>
   <script src="./components/angular-route/angular-route.min.js"></script>
   <script src="./components/satellizer/dist/satellizer.min.js"></script>
+  <script src="./components/angular-flash-alert/dist/angular-flash.js"></script>
   <script src="./components/underscore/underscore-min.js"></script>
   <script src="./components/moment/moment.js"></script>
-  <script src="./components/message-center/message-center.js"></script>
   <script src="./js/helper_functions.js"></script>
   <script src="./js/data_controllers.js"></script>
   <script src="./js/auth_controllers.js"></script>
@@ -51,6 +51,13 @@
     <div ng-include src="'/views/partials/header.html'"></div>
   </header>
   <div class="container" style="margin-top: 120px;">
+    
+    <flash-message 
+      duration="5000"
+      show-close="true"
+      on-dismiss="myCallback(flash);">
+    </flash-message>
+    
     <div ng-view></div>
   </div>
   <!-- /.container -->
