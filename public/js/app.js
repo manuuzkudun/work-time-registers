@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp", ["ngRoute", "data","satellizer","auth","ngFlash"]);
+var myApp = angular.module("myApp", ["ngRoute", "data","satellizer","auth","ngFlash","ui.gravatar"]);
 
 myApp.config(function ($routeProvider, $authProvider,$locationProvider) {
    

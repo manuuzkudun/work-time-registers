@@ -15,8 +15,8 @@
       <ng-include src="'/views/partials/select_employee_form.html'"></ng-include>
     </div> 
     <div ng-show="user">
+      <img gravatar-src="user.email" gravatar-size="150" class="img-circle">
       <h3 class="text-primary">{{user.name}}</h3>
-      <img class="img-responsive" src="http://placehold.it/150x200" alt ="{{user.name}}">
     </div>
   </div>
     
