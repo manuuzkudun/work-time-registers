@@ -33,6 +33,11 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
         var id = Flash.create('success', message, 3000, {class: 'custom-class', id: 'custom-id'}, true);
       
         $scope.registersProcessed = processData(data.registers);
+        $scope.modal = {
+            title: 'Modal Title',
+            content: 'Modal content',
+          placement: 'center'
+        };
     }, function (error) {
         $scope.status = 'Unable to load customer data: ' + error.message;
       });

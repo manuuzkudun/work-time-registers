@@ -156,7 +156,8 @@ function processData(registers) {
         endWork: leaveWork.time,
         totalRest: totalRest,
         totalWork: totalWork,
-        dateTime: dateTime
+        dateTime: dateTime,
+        dayRegisters: dayRegisters
       });
     });
  }
