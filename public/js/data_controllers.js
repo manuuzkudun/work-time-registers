@@ -9,10 +9,6 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
   getDataIfLogged();
   //getEmployees($scope.registers);
   
-  $scope.modal = {
- title: 'Modal Title',
- content: 'Modal content'
-};
 
   $scope.sortByDate = function (register) {
     var date = new Date(register.dateTime);

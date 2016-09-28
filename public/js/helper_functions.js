@@ -136,3 +136,27 @@ function computeTotalRest(startRest, endRest) {
     return 'no-data';
   }
 }
+
+
+
+function processData(registers) {
+    var dates = getDates(registers);
+    return  dates.map(function (date) {
+      var dayRegisters = getDayRegisters(date, registers);
+      var startWork = getStartWork(dayRegisters);
+      var leaveWork = getLeaveWork(dayRegisters);
+      var restStart = getRestStart(dayRegisters);
+      var restEnd = getRestEnd(dayRegisters);
+      var dateTime = dayRegisters[0].dateTime;
+      var totalRest = computeTotalRest(restStart, restEnd);
+      var totalWork = computeTotalWork(startWork, leaveWork);
+      return ({
+        date: date,
+        startWork: startWork.time,
+        endWork: leaveWork.time,
+        totalRest: totalRest,
+        totalWork: totalWork,
+        dateTime: dateTime
+      });
+    });
+ }
