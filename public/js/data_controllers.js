@@ -8,6 +8,11 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
   $scope.registersProcessed = null;
   getDataIfLogged();
   //getEmployees($scope.registers);
+  
+  $scope.modal = {
+ title: 'Modal Title',
+ content: 'Modal content'
+};
 
   $scope.sortByDate = function (register) {
     var date = new Date(register.dateTime);
@@ -44,27 +49,6 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
     });
   }
 
-  function processData(registers) {
-    var dates = getDates(registers);
-    return  dates.map(function (date) {
-      var dayRegisters = getDayRegisters(date, registers);
-      var startWork = getStartWork(dayRegisters);
-      var leaveWork = getLeaveWork(dayRegisters);
-      var restStart = getRestStart(dayRegisters);
-      var restEnd = getRestEnd(dayRegisters);
-      var dateTime = dayRegisters[0].dateTime;
-      var totalRest = computeTotalRest(restStart, restEnd);
-      var totalWork = computeTotalWork(startWork, leaveWork);
-      return ({
-        date: date,
-        startWork: startWork.time,
-        endWork: leaveWork.time,
-        totalRest: totalRest,
-        totalWork: totalWork,
-        dateTime: dateTime
-      });
-    });
- }
 
 
 });
