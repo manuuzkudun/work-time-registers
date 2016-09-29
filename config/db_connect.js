@@ -3,7 +3,7 @@
 const mongoose = require('mongoose'),
       config = require('./db_config');
 
-mongoose.connect(config.ext_db_uri, (err, db) => {
+mongoose.connect("mongodb://test:test@ds041144.mlab.com:41144/worktime", (err, db) => {
   if (!err) {
     console.log("We are connected to mongoDb");
   }
