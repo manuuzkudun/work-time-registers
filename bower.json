@@ -1,0 +1,32 @@
+{
+  "name": "worktime",
+  "description": "wep-app to check your work time",
+  "main": "app.js",
+  "authors": [
+    "Manu Uzkudun <uzkudun@mdpi.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/manuuzkudun/work-time-registers",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "^1.5.8",
+    "angular-flash-alert": "^2.3.0",
+    "angular-gravatar": "^0.4.2",
+    "angular-motion": "^0.4.4",
+    "angular-route": "^1.5.8",
+    "angular-strap": "^2.3.9",
+    "bootstrap": "^3.3.7",
+    "moment": "^2.15.1",
+    "satellizer": "^0.15.5",
+    "underscore": "^1.8.3",
+    "angular-xeditable": "^0.4.0"
+  }
+}

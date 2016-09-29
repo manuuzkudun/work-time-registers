@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose'),
-      db = require('../config/db');
+      db = require('../config/db_connect');
 
 
 const registerSchema = mongoose.Schema({

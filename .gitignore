@@ -1,3 +1,4 @@
 node_modules
 public/components
 config/auth_config.js
+config/db_config.js

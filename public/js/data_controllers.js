@@ -9,6 +9,9 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
   getDataIfLogged();
   //getEmployees($scope.registers);
   
+  
+
+  
 
   $scope.sortByDate = function (register) {
     var date = new Date(register.dateTime);
@@ -29,8 +32,9 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
           email: data.email,
           admin: data.admin
         };
+        // Flash alert
         var message = 'You are logged as <strong>' + data.name + '</strong>';
-        var id = Flash.create('success', message, 3000, {class: 'custom-class', id: 'custom-id'}, true);
+        var id = Flash.create('success', message, 3000, true);
       
         $scope.registersProcessed = processData(data.registers);
         $scope.modal = {
