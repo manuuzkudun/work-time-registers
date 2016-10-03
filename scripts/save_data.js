@@ -1,8 +1,24 @@
-/*'use strict';
-
-const dataInit = require('../config/dataInit');
-
-const employees = dataInit.employees;
-// TO-DO: import it as a function with a path parameter 
+'use strict';
+const _ = require('underscore');
+const mongoose = require('mongoose');
+const Employee = require("../models/Employee");
+const employees = require('../config/employees.json');
 const registers = require('../config/registers_to_json');
-dataInit.loadInitDataToDb(employees,registers);*/
+
+
+employees.forEach( employee => {
+  const empl = new Employee(employee);
+  const employeeRegs = _.where(registers,{employeeId: empl._id });
+  employeeRegs.forEach( register => {
+      empl.registers.push({
+        dateTime: register.dateTime,
+        action: register.action
+      });
+    });
+  empl.save( error =>{
+    if (error) throw error;
+    console.log('Employee saved');
+  });
+});
+
+mongoose.disconnect();

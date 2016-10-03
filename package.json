@@ -30,5 +30,9 @@
     "nodemon": "^1.10.2",
     "reload": "^1.0.1",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-latest": "^6.16.0"
   }
 }
