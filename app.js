@@ -25,7 +25,7 @@ app.use((req,res,next) => {
 // Load routes
 app.use('/auth', require('./routes/auth_api'));
 app.use('/api', require('./routes/employee_api'));
-var server = app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
   console.log(`Example app listening on port ${app.get('port')}!`);
 });
 

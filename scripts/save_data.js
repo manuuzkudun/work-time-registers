@@ -3,7 +3,7 @@ const _ = require('underscore');
 const mongoose = require('mongoose');
 const Employee = require("../models/Employee");
 const employees = require('../config/employees.json');
-const registers = require('../config/registers_to_json');
+const registers = require('./registers_to_json');
 
 
 employees.forEach( employee => {

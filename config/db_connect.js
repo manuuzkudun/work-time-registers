@@ -1,7 +1,7 @@
 'use strict';
 
-const mongoose = require('mongoose'),
-      config = require('./db_config');
+const mongoose = require('mongoose');
+const config = require('./db_config');
 
 mongoose.connect(config.ext_db_uri, (err, db) => {
   if (!err) {

@@ -1,9 +1,9 @@
 'use strict';
 
-const express = require('express'),
-      router = express.Router(),
-      Employee = require("../models/Employee"),
-      token = require('../services/token');
+const express = require('express');
+const router = express.Router();
+const Employee = require("../models/Employee");
+const token = require('../services/token');
 
 
 router.post('/signup', (req,res) => {
@@ -16,7 +16,7 @@ router.post('/signup', (req,res) => {
 
 
 router.post('/login', (req,res) => {
-  Employee.findOne({email: req.body.email.toLowerCase()}, (err, user) => {
+  Employee.findOne({email: req.body.email.toLowerCase()}, (err, user) => {      
     if (err) throw err;
     if (user) {
       if (req.body.password == user.password ) {
@@ -27,7 +27,7 @@ router.post('/login', (req,res) => {
     } else {
       
     }
-});
+  });
 });
 
 module.exports = router;

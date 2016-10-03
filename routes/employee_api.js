@@ -1,9 +1,9 @@
 'use strict';
-const express = require('express')
-  , router = express.Router()
-  , dateFormat = require('dateformat')
-  , Employee = require("../models/Employee")
-  , middleware = require('../services/auth_middleware');
+const express = require('express');
+const router = express.Router();
+const dateFormat = require('dateformat');
+const Employee = require("../models/Employee");
+const middleware = require('../services/auth_middleware');
 
 router.get('/employee', middleware.ensureAuthenticated, (req, res) => {
   Employee.findOne({
