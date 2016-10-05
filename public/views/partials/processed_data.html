@@ -12,12 +12,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="register in registersProcessed | orderBy : '-dateTime'" ng-class="{warning: register.totalRest == 'no-data'}">
+    <tr ng-repeat="register in registersProcessed | orderBy : '-dateTime'" ng-class="{warning: register.totalWork == 'null' || register.totalRest == 'null'}">
       <td> {{register.date}} </td>
-      <td> {{register.startWork}} </td>
-      <td> {{register.endWork}} </td>
-      <td class="control-data"> {{register.totalRest}} </td>
-      <td class="control-data"> {{register.totalWork.toString()}} </td>
+      <td ng-class="{'null-data': register.startWork == 'null'}"> {{register.startWork}} </td>
+      <td ng-class="{'null-data': register.endWork == 'null'}"> {{register.endWork}} </td>
+      <td ng-class="{'null-data': register.totalRest == 'null'}"> {{register.totalRest}} </td>
+      <td ng-class="{'null-data': register.totalWork == 'null'}"> {{register.totalWork.toString()}} </td>
       <td>
         <button class="btn btn-info btn-xs" data-animation="am-fade-and-scale" bs-modal="modal" data-content-template="/views/partials/modal_template.html">Show Registers</button>
       </td>

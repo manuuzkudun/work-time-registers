@@ -8,7 +8,7 @@ const actions = {
   , '1': 'end-rest'
 };
 
-const dataString = fs.readFileSync("./config/records.csv", "UTF-8");
+const dataString = fs.readFileSync("./data/records.csv", "UTF-8");
 let registersData = dataString.split('\n'); 
 registersData = registersData.map( record => {
   const values = record.split('\t');

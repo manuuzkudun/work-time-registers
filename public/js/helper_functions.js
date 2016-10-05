@@ -1,6 +1,4 @@
-function timeDifference(reg1, reg2) {
-  var start = reg1.date + " " + reg1.time;
-  var end = reg2.date + " " + reg2.time;
+function timeDifference(start, end) {
   return moment.utc(moment(end, "DD/MM/YYYY HH:mm:ss").diff(moment(start, "DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss");
 }
 
@@ -48,12 +46,12 @@ function getStartWork(dayRegisters) {
   var candidates = _.where(dayRegisters, {
     action: 'start'
   });
-  if (candidates.length > 0) {
+  if (candidates && candidates.length > 0) {
     var index = 0;
     return candidates[index];
   }
   else {
-    return 'no-data';
+    return 'null';
   }
 }
 
@@ -61,12 +59,12 @@ function getLeaveWork(dayRegisters) {
   var candidates = _.where(dayRegisters, {
     action: 'leave'
   });
-  if (candidates.length > 0) {
+  if (candidates && candidates.length > 0) {
     var index = candidates.length - 1;
     return candidates[index];
   }
   else {
-    return 'no-data';
+    return 'null';
   }
 }
 
@@ -78,7 +76,7 @@ function getRestStart(dayRegisters) {
     return candidates;
   }
   else {
-    return 'no-data';
+    return 'null';
   }
 }
 
@@ -90,7 +88,7 @@ function getRestEnd(dayRegisters) {
     return candidates;
   }
   else {
-    return 'no-data';
+    return 'null';
   }
 }
 
@@ -103,12 +101,17 @@ function getDates(registers) {
   return dates;
 }
 
-function computeTotalWork(startWork, leaveWork) {
-  if (startWork && leaveWork && startWork != 'no-data' && leaveWork != 'no-data') {
-    return timeDifference(startWork, leaveWork) ;
+function computeTotalWork(startWork, leaveWork, totalRest) {
+  if (startWork && leaveWork &&  totalRest && startWork != 'null' && leaveWork != 'null' && totalRest != 'null') {
+    var start = startWork.date + " " + startWork.time;
+    var end = leaveWork.date + " " + leaveWork.time;
+    var startEnd = timeDifference(start, end);
+    start = startWork.date + " " + totalRest;
+    end = leaveWork.date + " " + startEnd;
+    return timeDifference(start, end);
   }
   else {
-    return 'no-data';
+    return 'null';
   }
 }
 
@@ -120,7 +123,7 @@ function sortRegistersByDate(registers){
 }
 
 function isRestDataCorrect(startRest, endRest) {
-  return (startRest.length > 0) && (endRest.length > 0) && (startRest.length == endRest.length) && (startRest != 'no-data') && (endRest != 'no-data');
+  return (startRest.length > 0) && (endRest.length > 0) && (startRest.length == endRest.length) && (startRest != 'null') && (endRest != 'null');
 }
 
 function computeTotalRest(startRest, endRest) {
@@ -129,11 +132,13 @@ function computeTotalRest(startRest, endRest) {
     var endRestSorted = sortRegistersByDate(endRest);
     var restDurations = [];
     for (i=0; i < startRest.length; i++){
-      restDurations.push( timeDifference(startRestSorted[i], endRestSorted[i]) );
+      var start = startRestSorted[i].date + " " + startRestSorted[i].time;
+      var end = endRestSorted[i].date + " " + endRestSorted[i].time;
+      restDurations.push( timeDifference(start, end) );
     }
     return sumTimeDurations(restDurations);
   } else {
-    return 'no-data';
+    return 'null';
   }
 }
 
@@ -149,11 +154,11 @@ function processData(registers) {
       var restEnd = getRestEnd(dayRegisters);
       var dateTime = dayRegisters[0].dateTime;
       var totalRest = computeTotalRest(restStart, restEnd);
-      var totalWork = computeTotalWork(startWork, leaveWork);
+      var totalWork = computeTotalWork(startWork, leaveWork, totalRest);
       return ({
         date: date,
-        startWork: startWork.time,
-        endWork: leaveWork.time,
+        startWork: startWork.time || 'null',
+        endWork: leaveWork.time || 'null',
         totalRest: totalRest,
         totalWork: totalWork,
         dateTime: dateTime,

@@ -2,7 +2,7 @@
 const _ = require('underscore');
 const mongoose = require('mongoose');
 const Employee = require("../models/Employee");
-const employees = require('../config/employees.json');
+const employees = require('../data/employees.json');
 const registers = require('./registers_to_json');
 
 

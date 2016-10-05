@@ -10,6 +10,7 @@ auth.controller("SignUpController", function ($scope, $auth, $location) {
       $location.path("/data");
     })
     .catch(function(response) {
+      $location.path("/");
     });
   }
 });
@@ -24,6 +25,7 @@ auth.controller("LoginController", function ($scope, $auth, $location) {
       $location.path("/data");
     })
     .catch(function(response){
+      $location.path("/");
     });
   }
 });
