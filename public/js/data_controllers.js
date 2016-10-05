@@ -1,6 +1,6 @@
-var myData = angular.module("data", []);
+var myData = angular.module("data");
 
-myData.controller('DataController', function ($scope, $http, dataFactory,$rootScope, Flash) {
+myData.controller('DataController', function ($scope, $http, registersFactory, dataFactory,$rootScope, Flash) {
   
   var data = null;
   $scope.data = null;
@@ -13,10 +13,7 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
 
   
 
-  $scope.sortByDate = function (register) {
-    var date = new Date(register.dateTime);
-    return date;
-  };
+  $scope.sortByDate = registersFactory.sortByDate;
 
   $scope.showError = function(register) {
     return register.totalRest == 'no-data' ? 'ERROR' : '';
@@ -36,7 +33,7 @@ myData.controller('DataController', function ($scope, $http, dataFactory,$rootSc
         var message = 'You are logged as <strong>' + data.name + '</strong>';
         var id = Flash.create('success', message, 3000, true);
       
-        $scope.registersProcessed = processData(data.registers);
+        $scope.registersProcessed = registersFactory.processData(data.registers);
         $scope.modal = {
             title: 'Modal Title',
             content: 'Modal content',

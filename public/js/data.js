@@ -1,0 +1,1 @@
+var myData = angular.module("data", []);
