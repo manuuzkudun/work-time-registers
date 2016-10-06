@@ -2,55 +2,30 @@ var myData = angular.module("data");
 
 myData.controller('DataController', function ($scope, $http, registersFactory, dataFactory,$rootScope, Flash) {
   
-  var data = null;
-  $scope.data = null;
-  $scope.dataProcessed = null;
+  $scope.user = null;
+  $scope.registers = null;
   $scope.registersProcessed = null;
-  getDataIfLogged();
-  //getEmployees($scope.registers);
-  
-  
-
-  
-
   $scope.sortByDate = registersFactory.sortByDate;
-
-  $scope.showError = function(register) {
-    return register.totalRest == 'no-data' ? 'ERROR' : '';
+  $scope.modal = {
+    title: 'Modal Title',
+    content: 'Modal content',
+    placement: 'center'
   };
-  
-  function getDataIfLogged() {
-    dataFactory.getAuthorizedData()
-      .then(function(response){
-        data = response.data;
-        $scope.registers = data.registers;  
-        $rootScope.user = {
-          name: data.name,
-          email: data.email,
-          admin: data.admin
-        };
-        // Flash alert
-        var message = 'You are logged as <strong>' + data.name + '</strong>';
-        var id = Flash.create('success', message, 3000, true);
+
+  dataFactory.getAuthorizedData()
+    .then( function(response) { 
+      $scope.registers = response.data.registers;  
+      $rootScope.user = {
+        name: response.data.name,
+        email: response.data.email,
+        admin: response.data.admin
+      };
+      $scope.registersProcessed = registersFactory.processData($scope.registers); 
+      var message = 'You are logged as <strong>' + response.data.name + '</strong>';
+      var id = Flash.create('success', message, 3000, true);
       
-        $scope.registersProcessed = registersFactory.processData(data.registers);
-        $scope.modal = {
-            title: 'Modal Title',
-            content: 'Modal content',
-          placement: 'center'
-        };
     }, function (error) {
-        $scope.status = 'Unable to load customer data: ' + error.message;
-      });
-    }
-  
-  function getEmployees() {
-    dataFactory.getEmployeeNames()
-      .then(function(res) {
-      $scope.employees = res.data;      
+      var message = 'Unable to load customer data';
+      var id = Flash.create('error', message, 3000, true);
     });
-  }
-
-
-
 });
