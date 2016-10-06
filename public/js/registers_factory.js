@@ -60,15 +60,20 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
     });
   };
   
+  registersFactory.sortByDate = function (register) {
+    var date = new Date(register.dateTime);
+    return date;
+  };
+  
   // Refractor!!!
   registersFactory.isRestDataCorrect = function(startRest, endRest) {
     return (startRest.length > 0) && (endRest.length > 0) && (startRest.length == endRest.length) && (startRest != 'null') && (endRest != 'null');
   };
   
   registersFactory.computeTotalRest = function(startRest, endRest) {
-    if ( isRestDataCorrect(startRest, endRest) ) {
-      var startRestSorted = this.sortRegistersByDate(startRest);
-      var endRestSorted = this.sortRegistersByDate(endRest);
+    if ( registersFactory.isRestDataCorrect(startRest, endRest) ) {
+      var startRestSorted = registersFactory.sortRegistersByDate(startRest);
+      var endRestSorted = registersFactory.sortRegistersByDate(endRest);
       var restDurations = [];
       for (i=0; i < startRest.length; i++){
         var start = startRestSorted[i].date + " " + startRestSorted[i].time;
@@ -95,16 +100,16 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
   };
   
   registersFactory.processData = function(registers) {
-    var dates = getDates(registers);
+    var dates = registersFactory.getDates(registers);
     return  dates.map(function (date) {
-      var dayRegisters = this.getDayRegisters(date, registers);
-      var startWork = this.getStartWork(dayRegisters);
-      var leaveWork = this.getLeaveWork(dayRegisters);
-      var restStart = this.getRestStart(dayRegisters);
-      var restEnd = this.getRestEnd(dayRegisters);
+      var dayRegisters = registersFactory.getDayRegisters(date, registers);
+      var startWork = registersFactory.getStartWork(dayRegisters);
+      var leaveWork = registersFactory.getLeaveWork(dayRegisters);
+      var restStart = registersFactory.getRestStart(dayRegisters);
+      var restEnd = registersFactory.getRestEnd(dayRegisters);
       var dateTime = dayRegisters[0].dateTime;
-      var totalRest = this.computeTotalRest(restStart, restEnd);
-      var totalWork = this.computeTotalWork(startWork, leaveWork, totalRest);
+      var totalRest = registersFactory.computeTotalRest(restStart, restEnd);
+      var totalWork = registersFactory.computeTotalWork(startWork, leaveWork, totalRest);
       return ({
         date: date,
         startWork: startWork.time || 'null',
