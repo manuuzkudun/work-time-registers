@@ -26,14 +26,18 @@ angular.module('data').factory('timeFactory', function () {
   timeFactory.sumTimeDurations = function(timeStringArray){
     var secs = 0, mins = 0, hours = 0;
     for (i= 0; i < timeStringArray.length; i++){
-      var t = timeFactory.getHoursMinsSecs(timeStringArray[i]);
-      var secsSum = t.secs + secs;
-      secs = secsSum % 60;
-      var secsMins = Math.floor(parseInt(secsSum / 60));
-      var minsSum = t.mins + mins + secsMins;
-      mins = minsSum % 60;
-      var minsHours = Math.floor(parseInt(minsSum / 60));
-      hours = t.hours + hours + minsHours;
+      if (timeStringArray[i] == 'null') {
+        continue;
+      } else {
+        var t = timeFactory.getHoursMinsSecs(timeStringArray[i]);
+        var secsSum = t.secs + secs;
+        secs = secsSum % 60;
+        var secsMins = Math.floor(parseInt(secsSum / 60));
+        var minsSum = t.mins + mins + secsMins;
+        mins = minsSum % 60;
+        var minsHours = Math.floor(parseInt(minsSum / 60));
+        hours = t.hours + hours + minsHours;
+      }
     }
     return timeFactory.formatTimeNumber(hours) + ":" + timeFactory.formatTimeNumber(mins) + ":" +  timeFactory.formatTimeNumber(secs); 
   };

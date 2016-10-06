@@ -54,16 +54,18 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
     });
   };
   
-  registersFactory.sortRegistersByDate = function(registers){
+  registersFactory.sortRegistersByDateTime = function(registers){
     return _.sortBy(registers, function(register){
       return new Date(register.dateTime);
     });
   };
   
-  registersFactory.sortByDate = function (register) {
-    var date = new Date(register.dateTime);
-    return date;
+  registersFactory.sortRegistersByDate = function(registers){
+    return _.sortBy(registers, function(register){
+      return new Date(register.date);
+    });
   };
+  
   
   // Refractor!!!
   registersFactory.isRestDataCorrect = function(startRest, endRest) {
@@ -72,8 +74,8 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
   
   registersFactory.computeTotalRest = function(startRest, endRest) {
     if ( registersFactory.isRestDataCorrect(startRest, endRest) ) {
-      var startRestSorted = registersFactory.sortRegistersByDate(startRest);
-      var endRestSorted = registersFactory.sortRegistersByDate(endRest);
+      var startRestSorted = registersFactory.sortRegistersByDateTime(startRest);
+      var endRestSorted = registersFactory.sortRegistersByDateTime(endRest);
       var restDurations = [];
       for (i=0; i < startRest.length; i++){
         var start = startRestSorted[i].date + " " + startRestSorted[i].time;
@@ -121,7 +123,29 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
       });
     });
  };
+  
+  
+  registersFactory.calculateWeekWork = function(weekData){
+    var dayWorkTimes = weekData.map(function(day){
+      return day.totalWork;
+    });
+    return timeFactory.sumTimeDurations(dayWorkTimes);
+  }
  
+  registersFactory.weekSummary = function(dayData){
+    var weekData =  _.groupBy(dayData, function (day) {
+      return moment(day.date, 'DD/MM/YYYY').startOf('isoWeek');
+    });
+    return Object.keys(weekData).map( function(week){
+      return {
+        dateTime: weekData[week][0].dateTime,
+        firstWeekDay: weekData[week][0].date,
+        lastWeekDay: weekData[week][weekData[week].length -1].date,
+        data: weekData[week],
+        totalWork: registersFactory.calculateWeekWork(weekData[week])
+      };
+    });
+  };
   
   return registersFactory;
 

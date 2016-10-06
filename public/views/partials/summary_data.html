@@ -1,2 +1,29 @@
 <div class="page-header">
   <h3 class="text-primary">Summary</h3> </div>
+<div>
+  <div class="panel panel-primary" style="margin: 20px 0;" ng-repeat="week in weekData | orderBy : '-dateTime'">
+    <div class="panel-heading">
+      <h4>Week of <strong>{{week.firstWeekDay}}-{{week.lastWeekDay}}</strong></h4> </div>
+    <div class="panel-body" style="padding: 0;">
+      <table class="table table-hover" style="margin: 0;">
+        <thead style="font-size: 16px;">
+          <tr>
+            <th>Date</th>
+            <th>Total Work</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="day in week.data  | orderBy : '-dateTime'" ng-class="{warning: day.totalWork == 'null'}">
+            <td> {{day.date}} </td>
+            <td ng-class="{'null-data': day.totalWork == 'null'}"> {{day.totalWork.toString()}} </td>
+            <td align="right">
+              <button class="btn btn-info btn-xs" data-animation="am-fade-and-scale" bs-modal="modal" data-content-template="/views/partials/modal_template.html">Show Registers</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel-footer">
+      <h4 class="text-primary" style="text-align:center;">Total Work: <strong>{{week.totalWork}}</strong></h4> </div>
+  </div>
+</div>

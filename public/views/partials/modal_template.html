@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     <!---->
-    <tr ng-repeat="register in register.dayRegisters | orderBy : sortByDate : true">
+    <tr ng-repeat="register in register.dayRegisters | orderBy : '-dateTime'">
       <td> {{register.date}} </td>
       <td> {{register.time}} </td>
       <!--<td> {{register.action | uppercase}} </td> -->
