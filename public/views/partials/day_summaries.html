@@ -19,7 +19,7 @@
       <td ng-class="{'null-data': day.totalRest == 'null'}"> {{day.totalRest}} </td>
       <td ng-class="{'null-data': day.totalWork == 'null'}"> {{day.totalWork.toString()}} </td>
       <td>
-        <button class="btn btn-info btn-xs" data-animation="am-fade-and-scale" bs-modal="modal" data-content-template="/views/partials/modal_template.html">Show Registers</button>
+        <button type="button" class="btn btn-info btn-xs" data-animation="am-fade-and-scale" data-template-url="/views/partials/modal_template.html" data-content-template="/views/partials/modal_content.html" bs-modal="modal">Show Registers</button>
       </td>
     </tr>
   </tbody>

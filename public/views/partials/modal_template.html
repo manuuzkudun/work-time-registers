@@ -1,16 +1,15 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="register in day.dayRegisters | orderBy : '-dateTime'">
-      <td> {{register.date}} </td>
-      <td> {{register.time}} </td>
-      <td style="border: none;" editable-text="register.action" e-label="Action">{{ register.action | uppercase }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body" ng-bind="content"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+        <button type="button" class="btn btn-default" ng-click="$hide()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

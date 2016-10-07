@@ -6,11 +6,6 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
   $scope.registers = null;
   $scope.daySummaries = null;
   $scope.weekSummaries = null;
-  $scope.modal = {
-    title: 'Modal Title',
-    content: 'Modal content',
-    placement: 'center'
-  };
   
   dataFactory.getAuthorizedData()
     .then( function(response) { 
@@ -30,4 +25,10 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
       var message = 'Unable to load customer data';
       var id = Flash.create('error', message, 3000, true);
     });
+  
+  
+  
+  
+  
+  
 });

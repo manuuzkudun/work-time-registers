@@ -138,7 +138,7 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
       var weekData =  _.groupBy(dayData, function (day) {
         return moment(day.date, 'DD/MM/YYYY').startOf('isoWeek');
       });
-      return Object.keys(weekData).map( function(week){
+      var weekSummaries = Object.keys(weekData).map( function(week){
         return {
           dateTime: weekData[week][0].dateTime,
           firstWeekDay: weekData[week][0].date,
@@ -147,6 +147,7 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
           totalWork: calculateWeekWork(weekData[week])
         };
       });
+      return sortRegistersByDateTime(weekSummaries);
     }
   }; 
   
