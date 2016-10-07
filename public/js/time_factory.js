@@ -4,7 +4,7 @@ angular.module('data').factory('timeFactory', function () {
   // Add a 0 before a number if the number has 1 digit
   // Ex: 3 -> 03
   // Need to refractor
-  formatTimeNumber = function(number){
+  var formatTimeNumber = function(number){
     var numberString = number.toString();
     if (numberString.length == 1) {
       numberString = "0" + numberString;
@@ -14,7 +14,7 @@ angular.module('data').factory('timeFactory', function () {
   
   // Given a time in a string format of HH:mm:ss
   // Returns an object with hours, mins and secs
-  getHoursMinsSecs = function(timeString){
+  var getHoursMinsSecs = function(timeString){
     var timeArray = timeString.split(':');
     return {
       hours: parseInt(timeArray[0]),
