@@ -3,8 +3,9 @@ const _ = require('underscore');
 const mongoose = require('mongoose');
 const Employee = require("../models/Employee");
 const employees = require('../data/employees.json');
-const registers = require('./registers_to_json');
-
+const registersToJSON = require('./registers_to_json');
+const dataPath = process.argv[2];
+const registers = registersToJSON(dataPath);
 
 employees.forEach( employee => {
   const empl = new Employee(employee);
