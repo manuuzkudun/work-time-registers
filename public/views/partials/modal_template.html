@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="register in register.dayRegisters | orderBy : '-dateTime'">
+    <tr ng-repeat="register in day.dayRegisters | orderBy : '-dateTime'">
       <td> {{register.date}} </td>
       <td> {{register.time}} </td>
       <td style="border: none;" editable-text="register.action" e-label="Action">{{ register.action | uppercase }}</td>
