@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="register in registersProcessed | orderBy : '-dateTime'" ng-class="{warning: register.totalWork == 'null' || register.totalRest == 'null'}">
+    <tr ng-repeat="register in daySummaries | orderBy : '-dateTime'" ng-class="{warning: register.totalWork == 'null' || register.totalRest == 'null'}">
       <td> {{register.date}} </td>
       <td ng-class="{'null-data': register.startWork == 'null'}"> {{register.startWork}} </td>
       <td ng-class="{'null-data': register.endWork == 'null'}"> {{register.endWork}} </td>

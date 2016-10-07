@@ -4,8 +4,8 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
   
   $rootScope.user = null;
   $scope.registers = null;
-  $scope.registersProcessed = null;
-  $scope.weekSummary = null;
+  $scope.daySummaries = null;
+  $scope.weekSummaries = null;
   $scope.modal = {
     title: 'Modal Title',
     content: 'Modal content',
@@ -20,8 +20,8 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
         email: response.data.email,
         admin: response.data.admin
       };
-      $scope.registersProcessed = registersFactory.processData($scope.registers);
-      $scope.weekData = registersFactory.weekSummary($scope.registersProcessed);
+      $scope.daySummaries = registersFactory.getDaySummaries($scope.registers);
+      $scope.weekSummaries = registersFactory.getWeekSummaries($scope.daySummaries);
     
       var message = 'You are logged as <strong>' + $rootScope.user.name + '</strong>';
       var id = Flash.create('success', message, 3000, true);

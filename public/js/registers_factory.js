@@ -112,7 +112,7 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
   /***** End of private methods ******/
   
   var registersFactory = {
-    processData: function(registers) {
+    getDaySummaries: function(registers) {
       var dates = getDates(registers);
       return  dates.map(function (date) {
         var dayRegisters = getDayRegisters(date, registers);
@@ -134,7 +134,7 @@ angular.module('data').factory('registersFactory', function (timeFactory) {
         });
       });
     },
-    weekSummary: function(dayData){
+    getWeekSummaries: function(dayData){
       var weekData =  _.groupBy(dayData, function (day) {
         return moment(day.date, 'DD/MM/YYYY').startOf('isoWeek');
       });

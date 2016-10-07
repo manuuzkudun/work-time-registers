@@ -1,7 +1,7 @@
 <div class="page-header">
   <h3 class="text-primary">Week Summaries</h3> </div>
 <div>
-  <div class="panel panel-primary" style="margin: 20px 0;" ng-repeat="week in weekData | orderBy : '-dateTime'">
+  <div class="panel panel-primary" style="margin: 20px 0;" ng-repeat="week in weekSummaries | orderBy : '-dateTime'">
     <div class="panel-heading">
       <h4>Week of <strong>{{week.firstWeekDay}}-{{week.lastWeekDay}}</strong></h4> </div>
     <div class="panel-body" style="padding: 0;">
