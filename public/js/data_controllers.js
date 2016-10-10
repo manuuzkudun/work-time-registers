@@ -2,11 +2,15 @@ var myData = angular.module("data");
 
 myData.controller('DataController', function ($scope, $http, registersFactory, dataFactory,$rootScope, Flash) {
   
+  var getDaySummaries = registersFactory.getDaySummaries;
+  var getWeekSummaries = registersFactory.getWeekSummaries;
+  
   $rootScope.user = null;
   $scope.registers = null;
   $scope.daySummaries = null;
   $scope.weekSummaries = null;
-  
+  $scope.updateData = function(){
+
   dataFactory.getAuthorizedData()
     .then( function(response) { 
       $scope.registers = response.data.registers;  
@@ -15,15 +19,10 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
         email: response.data.email,
         admin: response.data.admin
       };
-      $scope.daySummaries = registersFactory.getDaySummaries($scope.registers);
-      $scope.weekSummaries = registersFactory.getWeekSummaries($scope.daySummaries);    
+      $scope.daySummaries = getDaySummaries($scope.registers);
+      $scope.weekSummaries = getWeekSummaries($scope.daySummaries);    
     }, function (error) {
       var id = Flash.create('warning', 'Unable to load data', 3000, true);
     });
-  
-  
-  
-  
-  
   
 });
