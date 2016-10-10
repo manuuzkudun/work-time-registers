@@ -2,8 +2,8 @@
   {
     "_id": "1",
     "name": "Manu Uzkudun",
-    "email": "uzkudun@mdpi.com",
-    "password": "12345",
+    "email": "test@test.com",
+    "password": "test",
     "admin": "false"
   }
 ]

@@ -16,14 +16,9 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
         admin: response.data.admin
       };
       $scope.daySummaries = registersFactory.getDaySummaries($scope.registers);
-      $scope.weekSummaries = registersFactory.getWeekSummaries($scope.daySummaries);
-    
-      var message = 'You are logged as <strong>' + $rootScope.user.name + '</strong>';
-      var id = Flash.create('success', message, 3000, true);
-      
+      $scope.weekSummaries = registersFactory.getWeekSummaries($scope.daySummaries);    
     }, function (error) {
-      var message = 'Unable to load customer data';
-      var id = Flash.create('error', message, 3000, true);
+      var id = Flash.create('warning', 'Unable to load data', 3000, true);
     });
   
   
