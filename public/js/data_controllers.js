@@ -1,6 +1,6 @@
 var myData = angular.module("data");
 
-myData.controller('DataController', function ($scope, $http, registersFactory, dataFactory,$rootScope, Flash) {
+myData.controller('DataController', function ($scope, $http, registersFactory, dataFactory, $rootScope, Flash) {
   
   var getDaySummaries = registersFactory.getDaySummaries;
   var getWeekSummaries = registersFactory.getWeekSummaries;
@@ -20,8 +20,10 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
       };
       $scope.daySummaries = getDaySummaries($scope.registers);
       $scope.weekSummaries = getWeekSummaries($scope.daySummaries);    
-    }, function (error) {
+    })
+    .catch( function (error) {
       var id = Flash.create('warning', 'Unable to load data', 3000, true);
     });
+
   
 });
