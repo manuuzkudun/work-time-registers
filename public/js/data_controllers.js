@@ -9,7 +9,6 @@ myData.controller('DataController', function ($scope, $http, registersFactory, d
   $scope.registers = null;
   $scope.daySummaries = null;
   $scope.weekSummaries = null;
-  $scope.updateData = function(){
 
   dataFactory.getAuthorizedData()
     .then( function(response) { 
