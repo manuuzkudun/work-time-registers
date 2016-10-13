@@ -16,7 +16,15 @@ angular.module('data').factory('dataFactory', ['$http', function ($http) {
   };
 
   dataFactory.updateRegisters = function (data) {
-    return $http.put('/api/employee',data);
+    var requestData = {
+      data: data.map(function(register) {
+        return {
+          id: register.id,
+          action: register.action
+        }
+      })
+    };
+    return $http.put('/api/employee',requestData);
   };
 
 
